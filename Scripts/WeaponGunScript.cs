@@ -79,7 +79,7 @@ public class WeaponGunScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //-------------------------------------------------Weapon Bob
+        //---------------------------------------------------Weapon Bob
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
             weaponGun_Bob.Play("WeaponGun_BobVertical");
