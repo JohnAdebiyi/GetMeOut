@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System.IO;
-using UnityStandardAssets.Characters.FirstPerson;
+
 
 public class SettingManager : MonoBehaviour {
     public Toggle fullscreenToggle;
@@ -10,24 +9,24 @@ public class SettingManager : MonoBehaviour {
     public Dropdown textureQualityDropdown;
     public Dropdown antialiasingDropdown;
     public Dropdown vSyncDropdown;
-    //public Slider musicVolumeSlider;
-    //public Slider sfxVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
     public Slider masterVolumeSlider;
     public Button applyButton;
     public Button closeClick;
 
-    //public MusicManager musicSource;
-    //public SFX_Manager sfxSource;
+    public MusicManager musicSource;
+    public SFX_Manager sfxSource;
     public Resolution[] resolutions;
     public GameSettings gameSettings;
 
     public GameObject options_panel;
     public GameObject onPause_Panel;
 
-
     void OnEnable()
     {
-     
+        musicSource = FindObjectOfType<MusicManager>();
+        sfxSource = FindObjectOfType<SFX_Manager>();
         gameSettings = new GameSettings();
 
         fullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); });
@@ -35,8 +34,8 @@ public class SettingManager : MonoBehaviour {
         textureQualityDropdown.onValueChanged.AddListener(delegate { OnTextureQualityChange(); });
         antialiasingDropdown.onValueChanged.AddListener(delegate { OnAntialiasingChange(); });
         vSyncDropdown.onValueChanged.AddListener(delegate { OnVSyncChange(); });
-        //musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolume(); });
-        //sfxVolumeSlider.onValueChanged.AddListener(delegate { OnSfxVolume(); });
+        musicVolumeSlider.onValueChanged.AddListener(delegate { OnMusicVolume(); });
+        sfxVolumeSlider.onValueChanged.AddListener(delegate { OnSfxVolume(); });
         masterVolumeSlider.onValueChanged.AddListener(delegate { OnMasterVolume(); });
         applyButton.onClick.AddListener(delegate { OnApplyButtonClick(); });
         closeClick.onClick.AddListener(delegate { OnCloseClick(); });
@@ -53,7 +52,7 @@ public class SettingManager : MonoBehaviour {
 
     public void OnFullscreenToggle()
     {
-  
+
         gameSettings.fullscreen = Screen.fullScreen = fullscreenToggle.isOn;
     }
 
@@ -81,19 +80,22 @@ public class SettingManager : MonoBehaviour {
 
         QualitySettings.vSyncCount = gameSettings.vSync = vSyncDropdown.value;
     }
-    /**
+    
     public void OnMusicVolume()
     {
 
-        musicSource.GetComponent<AudioSource>().volume = gameSettings.musicVolume = musicVolumeSlider.value;
+        float _volume = gameSettings.musicVolume = musicVolumeSlider.value;
+        musicSource.Volume(_volume);
 
     }
 
     public void OnSfxVolume()
-    {    
-        sfxSource.volume = gameSettings.sfxVolume = sfxVolumeSlider.value;
+    {
+        FindObjectOfType<SFX_Manager>().Play("buttonSound");
+        float _volume = gameSettings.sfxVolume = sfxVolumeSlider.value;
+        sfxSource.Volume(_volume);
     }
-    **/
+    
     public void OnMasterVolume()
     {
         AudioListener.volume = gameSettings.masterVolume = masterVolumeSlider.value;
@@ -103,12 +105,14 @@ public class SettingManager : MonoBehaviour {
     {
         FindObjectOfType<SFX_Manager>().Play("buttonSound");
         SaveSettings();
+        FindObjectOfType<MusicManager>().Stop("song_Settings");
     }
     public void OnCloseClick()
     {
         FindObjectOfType<SFX_Manager>().Play("buttonSound");
         options_panel.SetActive(false);
-        onPause_Panel.SetActive(true); 
+        onPause_Panel.SetActive(true);
+        FindObjectOfType<MusicManager>().Stop("song_Settings");
     }
 
     public void SaveSettings()
@@ -124,8 +128,8 @@ public class SettingManager : MonoBehaviour {
         gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesetting.json"));
 
         masterVolumeSlider.value = gameSettings.masterVolume;
-       //sfxVolumeSlider.value = gameSettings.sfxVolume;
-        //musicVolumeSlider.value = gameSettings.musicVolume;
+        sfxVolumeSlider.value = gameSettings.sfxVolume;
+        musicVolumeSlider.value = gameSettings.musicVolume;
         antialiasingDropdown.value = gameSettings.antialiasing;
         vSyncDropdown.value = gameSettings.vSync;
         textureQualityDropdown.value = gameSettings.textureQuality;

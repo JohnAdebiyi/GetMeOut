@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Audio;
 using System;
 
 public class MusicManager : MonoBehaviour {
 
     public Sound[] sounds;
-
 
     public static MusicManager instance; // to avoid multiple instances of this gameobject in scenes
 
@@ -30,6 +28,14 @@ public class MusicManager : MonoBehaviour {
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+
+            //if quality setting is open ignore pausing music song_Settings
+            if (s.name == "song_Settings")
+            {
+                s.source.ignoreListenerPause = true;
+            }
+
+
         }
 	}
 
@@ -47,6 +53,7 @@ public class MusicManager : MonoBehaviour {
             return;
         }
         s.source.Play();
+
     }
 
 
@@ -60,5 +67,13 @@ public class MusicManager : MonoBehaviour {
             return;
         }
         s.source.Stop();
+    }
+
+    public void Volume(float _volume)
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = _volume;
+        }
     }
 }
