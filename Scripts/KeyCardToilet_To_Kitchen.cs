@@ -7,6 +7,7 @@ public class KeyCardToilet_To_Kitchen : MonoBehaviour {
     public GameObject openPanel = null;
     public GameObject shownMinimizedKeycard003;
     public Camera fpsCam;
+    public ParticleSystem computerLocationEff;
 
     public string openText = "Take key card";
     public string closeText = "";
@@ -71,15 +72,16 @@ public class KeyCardToilet_To_Kitchen : MonoBehaviour {
 
                     DoorKitchenScript.keyCard_To_Laptop = true;// set to true so the kitchen door shows "go do activation to open" 
                     Laptop_GameScript_2.keyCard_To_Laptop = true;// set to true so player can play the second game
-
                     Laptop_GameScript.putOffPanel_Game1 = true;// in case first game wasnt played then dont show the panel
-                                                               //Laptop_GameScript_2.putLaptopOn = true;
+                                                      
                     Destroy(this.gameObject);
                     openPanel.SetActive(false);// panel is invincible
                     shownMinimizedKeycard003.SetActive(true);
-                    Timer.countKeycards -= 1;
+                    Timer.countKeycards += 1;
 
                     FindObjectOfType<SFX_Manager>().Play("gotItem");
+
+                    computerLocationEff.Play();
                 }
             }
         }

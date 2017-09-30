@@ -4,6 +4,7 @@ public class DoorOutsideScript : MonoBehaviour {
     public Animator _animator;
     public GameObject OpenPanel = null;
     public Camera fpsCam;
+    public GameObject mouse;
 
     public bool inTrigger;
 
@@ -49,6 +50,7 @@ public class DoorOutsideScript : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "door_Outside" || hit.collider.gameObject.tag == "slot_Outside")
             {
+                            mouse.SetActive(false);
                             if (weaponObtained == true)
                             {
                                 //do nothing
@@ -57,13 +59,13 @@ public class DoorOutsideScript : MonoBehaviour {
                             {
                                 inTrigger = true;
                                 UpdatePanelText();
-                                OpenPanel.SetActive(true);
-                                _animator.SetBool("OutsideSlot_showError", true);
+                                OpenPanel.SetActive(true);                                
                             }
             }
         }
         else
         {
+                            mouse.SetActive(true);
                             if (weaponObtained == true)
                             {
                                 //do nothing
@@ -72,20 +74,24 @@ public class DoorOutsideScript : MonoBehaviour {
                             {
                                 inTrigger = false;
                                 OpenPanel.SetActive(false);
-                                _animator.SetBool("OutsideSlot_showError", false);
                             }
         }
 
         //if _isInsideTrigger is true and mouse is pressed open outside door
         if (inTrigger == true)
         {
+
+            if (weaponObtained == false)
+            {
                 if (Input.GetMouseButtonDown(1))
                 {
+                    FindObjectOfType<SFX_Manager>().Play("error");
+                    _animator.SetBool("OutsideSlot_showError", true);
                     _animator.SetBool("open_OutsideDoor", false);
-                   // OpenPanel.SetActive(false);
+                    // OpenPanel.SetActive(false);
                     //OpenPanel = null;
                 }
-            
+            }
         }
 
         //if weapon obtained, open the ouside door and show no slot errors

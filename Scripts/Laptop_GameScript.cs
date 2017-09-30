@@ -23,7 +23,7 @@ public class Laptop_GameScript : MonoBehaviour {
     [Space]
     [Space]
     public Camera fpsCam;// fpscam for raycast
-
+    public ParticleSystem computerLocationEff;
     [Space]
     [Space]
     private bool correct = false;
@@ -45,8 +45,7 @@ public class Laptop_GameScript : MonoBehaviour {
     {
         _animator = GetComponent<Animator>();
         playerStatus = GetComponent<PlayerStatusScript>();
-        healthbar_blur = GetComponent<HealthBar_BlurScript>();
-       
+        healthbar_blur = GetComponent<HealthBar_BlurScript>();       
     }
 
 
@@ -200,6 +199,8 @@ public class Laptop_GameScript : MonoBehaviour {
                         correct = true;
                         _animator.SetBool("Laptop_on", false);
                         FindObjectOfType<SFX_Manager>().Play("correctAnswer");
+
+                        computerLocationEff.Stop();
                     }
                     else if (laptop_myNumber.text == "")
                     {
@@ -283,6 +284,8 @@ public class Laptop_GameScript : MonoBehaviour {
                 laptop_OpenPanel = null;
                 correct = true;
                 _animator.SetBool("Laptop_on", false);
+
+                computerLocationEff.Stop();
             }
             
             else

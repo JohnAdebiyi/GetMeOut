@@ -9,6 +9,8 @@ public class KeyCardLivingroomScript : MonoBehaviour
     public Camera fpsCam;
     public GameObject keycard;
 
+    public ParticleSystem computerLocationEff;// in case first game wasnt played then stop the effect when keycard has been obtained
+
     public string openText = "Take key card";
     public string closeText = "";
 
@@ -63,11 +65,13 @@ public class KeyCardLivingroomScript : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(1))
                 {
+                    Laptop_GameScript.putOffPanel_Game1 = true;// in case first game wasnt played then dont show the panel
+                    computerLocationEff.Stop();// in case first game wasnt played then stop the effect when keycard has been obtained
                     DoorBathroomScript.keyCard_To_Bathroom = true;
                     keycard.SetActive(false);
                     openPanel.SetActive(false);
                     shownMinimizedKeycard.SetActive(true);
-                    Timer.countKeycards -= 1;
+                    Timer.countKeycards += 1;
 
                     FindObjectOfType<SFX_Manager>().Play("gotItem");
                 }

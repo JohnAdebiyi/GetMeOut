@@ -13,6 +13,9 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
     public Collider weaponInSafe_Collider; // weaponInSafe and weapon_slot_Screen Gameobject needs to be assigned
     public Camera fpsCam;
 
+    public GameObject panel_insertTheCorrectCard;
+    public GameObject keycard_inserted;
+
     public bool inTrigger;
 
     public string openText = "Insert keycard to open";
@@ -71,9 +74,9 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
             {
                 inTrigger = true;
                 UpdatePanelText();
-                _animator.SetBool("weaponSlot_showError", true);
                 if (keyCard_To_Laptop == true)//if key card is set to true from Laptop_GameScript3.KeyCard_To_Laptop
                 {
+                    panel_insertTheCorrectCard.SetActive(false);
                     openPanel_go_Do_Activation.SetActive(true);
                 }
                 else
@@ -84,10 +87,11 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
         }
         else
         {
+            panel_insertTheCorrectCard.SetActive(false);
             inTrigger = false;
-            _animator.SetBool("weaponSlot_showError", false);
             if (keyCard_To_Laptop == true)//if player has the keycard deactivate the go do activation panel
             {
+                panel_insertTheCorrectCard.SetActive(false);
                 openPanel_go_Do_Activation.SetActive(false);
             }
             else
@@ -107,18 +111,28 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                   //if (true)
-                    if (keycardIsActiv == true)
+                  //if (true)
+                     if (keycardIsActiv == true)
                     {
                         _animator.SetBool("openWeaponSafe", true);// open the safe
                         StartCoroutine(openSafe());// wait for a certain amount of time till safe is opened and then enable the the weaponInSafe_Collider
 
                         openPanel.SetActive(false);// panel is invincible
+                        _animator.SetBool("weaponSlot_showError", true);
                         _animator.SetBool("weaponSlot_showNoError", true);
                         openPanel = null;
                         Laptop_GameScript_3.keyCard_To_Laptop = false; // deactivate panel "game"
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
-
+                        keycard_inserted.SetActive(true);                        
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            FindObjectOfType<SFX_Manager>().Play("error");
+                            _animator.SetBool("weaponSlot_showError", true);
+                            panel_insertTheCorrectCard.SetActive(true);
+                        }
                     }
                 }
             }

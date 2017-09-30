@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
 public class Take_OutsideItemsScript : MonoBehaviour
 {
 
     public GameObject openPanel = null;
-    public GameObject showpassword_Panel;
+    public GameObject showpassword_Panel;//small
+    public GameObject password_BigPanel;//big
     public Camera fpsCam;
     private PlayerStatusScript giveHealth;
 
@@ -163,7 +165,7 @@ public class Take_OutsideItemsScript : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                    showpassword_Panel.SetActive(true);
+                    StartCoroutine(ShowPassword());
                     Destroy(GameObject.FindWithTag("take_PaperOutside"));// destroy paper item
                     openPanel.SetActive(false);// panel is invincible
                     inTrigger4 = false;
@@ -173,6 +175,14 @@ public class Take_OutsideItemsScript : MonoBehaviour
         }
     }
 
+    //show the the password panel for some seconds and then deactivate and set the mini password panel to true
+    IEnumerator ShowPassword()
+    {
+        password_BigPanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        password_BigPanel.SetActive(false);
+        showpassword_Panel.SetActive(true);
+    }
 
     void Update()
     {

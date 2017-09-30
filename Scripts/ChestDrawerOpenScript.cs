@@ -5,9 +5,10 @@ public class ChestDrawerOpenScript : MonoBehaviour
 
     public Animator _animator;
     public GameObject paper;//paper.png
-    public GameObject panel_Chestdrawer = null;
+    public GameObject panel_Chestdrawer = null;//open drawer, close drawer
     public GameObject openPanel_ToReadPaper;
     public Camera fpsCam;
+    public GameObject Keypad_Bedroom;
 
     private bool _isInsideTrigger = false;
     public string openText = "open drawer";
@@ -64,10 +65,16 @@ public class ChestDrawerOpenScript : MonoBehaviour
                 _isInsideTrigger = true;
                 UpdatePanelText();
                 panel_Chestdrawer.SetActive(true);
-            }
+            }else
+                {
+                    _isInsideTrigger = false;
+                    panel_Chestdrawer.SetActive(false);
+                    openPanel_ToReadPaper.SetActive(false);
+                }
             if (hit.collider.gameObject.tag == "safe_Bedroom")// in case raycast hits the bedroom Safe then deactivate the chestdrawer or paper panel
             {
                 panel_Chestdrawer.SetActive(false);
+                openPanel_ToReadPaper.SetActive(false);
             }
         }
         else
@@ -94,7 +101,7 @@ public class ChestDrawerOpenScript : MonoBehaviour
                     UpdatePanelText();
 
                     _animator.SetBool("open", _isOpen);
-                    FindObjectOfType<SFX_Manager>().Play("chestDrawer");
+                    FindObjectOfType<SFX_Manager>().Play("chestDrawer");                    
                 }
             }
             if (_animator.GetBool("open") == true)
@@ -115,7 +122,9 @@ public class ChestDrawerOpenScript : MonoBehaviour
             if (_isInsideTrigger == false)
             {
                 openPanel_ToReadPaper.SetActive(false);
+                panel_Chestdrawer.SetActive(false);
             }
+
         }
     }
 

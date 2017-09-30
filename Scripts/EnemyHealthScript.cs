@@ -6,7 +6,7 @@ public class EnemyHealthScript : MonoBehaviour {
     private float currentHealth = 0f;
     private static int enemiesDead = 0;
 
-    private static int enemiesDeadCounter = 5;
+    public static int enemiesDeadCounter = 5;
     public Text enemiesCounterText;
     public GameObject enemiesCounterPanel;
 
@@ -22,6 +22,7 @@ public class EnemyHealthScript : MonoBehaviour {
 
     public GameObject pointerToKeycardTerminal;
 
+    public ParticleSystem houseCaveEntranceEff;
     void Start()
     {
         //Image bar - full bar at start
@@ -66,11 +67,15 @@ public class EnemyHealthScript : MonoBehaviour {
         if (enemiesDead == 5)
         {
             Debug.Log("dead");
-            Destroy(GameObject.FindWithTag("caveDoor1"));// destroy paper item
-            Destroy(GameObject.FindWithTag("caveDoor2"));// destroy paper item
+            Destroy(GameObject.FindWithTag("caveDoor1"));
+            Destroy(GameObject.FindWithTag("caveDoor2"));
 
             enemiesCounterPanel.SetActive(false);
             pointerToKeycardTerminal.SetActive(true);
+
+            houseCaveEntranceEff.Play();
+
+            Keypad_BedRoom_SAFE_Script.enemiesAreDead = true;
         }
 
 

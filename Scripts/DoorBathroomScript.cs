@@ -6,6 +6,8 @@ public class DoorBathroomScript : MonoBehaviour {
     public GameObject openPanel = null;
     public GameObject destroyKeycardMinimalized002;// for destroying the panel keycard obtainded
     public Camera fpsCam;
+    public GameObject panel_insertTheCorrectCard;
+    public GameObject keycard_inserted;
 
     public bool inTrigger;
 
@@ -54,14 +56,13 @@ public class DoorBathroomScript : MonoBehaviour {
                 inTrigger = true;
                 UpdatePanelText();
                 openPanel.SetActive(true);
-                _animator.SetBool("BathroomSlot_showError", true);
             }
         }
         else
         {
             inTrigger = false;
             openPanel.SetActive(false);
-            _animator.SetBool("BathroomSlot_showError", false);
+            panel_insertTheCorrectCard.SetActive(false);
         }
     }
 
@@ -81,9 +82,20 @@ public class DoorBathroomScript : MonoBehaviour {
                     {
                         _animator.SetBool("OpenDoorBathroom", true);
                         openPanel.SetActive(false);// panel is invincible
+                        _animator.SetBool("BathroomSlot_showError", true);
                         _animator.SetBool("BathroomSlot_showNoError", true);
                         openPanel = null;
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
+                        keycard_inserted.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        FindObjectOfType<SFX_Manager>().Play("error");
+                        _animator.SetBool("BathroomSlot_showError", true);
+                        panel_insertTheCorrectCard.SetActive(true);
                     }
                 }
             }

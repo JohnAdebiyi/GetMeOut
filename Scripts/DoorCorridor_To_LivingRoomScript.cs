@@ -5,7 +5,7 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
     public Animator _animator;
     public GameObject openPanel = null;
     public Camera fpsCam;
-
+    public ParticleSystem computerLocationEff;
     public bool inTrigger;
 
     public string openText = "Left mouse to Open door";
@@ -76,6 +76,8 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
 
                     openPanel = null;
                     FindObjectOfType<SFX_Manager>().Play("doorOpen");
+
+                    computerLocationEff.Play();
                 }
             }
         }

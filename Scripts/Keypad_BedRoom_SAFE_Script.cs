@@ -9,13 +9,13 @@ public class Keypad_BedRoom_SAFE_Script : MonoBehaviour
     public GameObject destroyPasswordMinimalized;//using tag to destroy
     public Camera fpsCam;
     public Collider keycard_Terminal1;// activate the keycard collider when door is opened
-    public GameObject test;
+
 
     public string currentPassword_BedRoom;
     public bool bedroom_inTrigger;
     public bool bedroom_doorOpended;
     public bool bedroom_keyPadScreen;
-    //public Transform DoorHolder;
+    public static bool enemiesAreDead;
 
 
 
@@ -43,6 +43,12 @@ public class Keypad_BedRoom_SAFE_Script : MonoBehaviour
                 bedroom_inTrigger = true;
                 openPanel_Keypad.SetActive(true);
             }
+            else
+                {
+                    bedroom_inTrigger = false;
+                    bedroom_keyPadScreen = false;
+                    openPanel_Keypad.SetActive(false);
+                }
             if (hit.collider.gameObject.tag == "chestdrawer_Bedroom")// in case raycast hits the chestdrawer Safe then deactivate the bedroom safe panel
             {
                 openPanel_Keypad.SetActive(false);
@@ -54,7 +60,6 @@ public class Keypad_BedRoom_SAFE_Script : MonoBehaviour
             bedroom_inTrigger = false;
             bedroom_keyPadScreen = false;
             openPanel_Keypad.SetActive(false);
-
         }
 
 
@@ -173,10 +178,14 @@ public class Keypad_BedRoom_SAFE_Script : MonoBehaviour
         {
             bedroom_myNumber.text = "";
         }
+
         if (bedroom_myNumber.text == currentPassword_BedRoom)
         {
+            if (enemiesAreDead)
+            { 
             FindObjectOfType<SFX_Manager>().Play("openSafe");
             bedroom_doorOpended = true;
+            }
         }
 
     }

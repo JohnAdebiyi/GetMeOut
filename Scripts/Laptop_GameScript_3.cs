@@ -24,6 +24,7 @@ public class Laptop_GameScript_3 : MonoBehaviour
     [Space]
     [Space]
     public Camera fpsCam;// fpscam for raycast
+    public ParticleSystem computerLocationEff;
     [Space]
     [Space]
     private bool laptop_isInsideTrigger = false;
@@ -188,6 +189,7 @@ public class Laptop_GameScript_3 : MonoBehaviour
                             laptop_OpenPanel3 = null;
                             correct = true;
                             FindObjectOfType<SFX_Manager>().Play("correctAnswer");
+                            computerLocationEff.Stop();
                         }
                         else if (laptop_myNumber.text == "")
                         {
@@ -280,11 +282,10 @@ public class Laptop_GameScript_3 : MonoBehaviour
         {
             if (laptop_myNumber.text == currentAnswer3)
             {
-
                 laptop_OpenPanel3.SetActive(false);
                 laptop_OpenPanel3 = null;
                 correct = true;
-
+                computerLocationEff.Stop();
             }
 
             else

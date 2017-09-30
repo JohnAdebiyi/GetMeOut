@@ -8,7 +8,8 @@ public class DoorBedroomScript : MonoBehaviour
     public GameObject openPanel = null;
     public GameObject destroyKeycardMinimalized001;// important! using Tag to destroy // for destroying the panel keycard obtainded
     public Camera fpsCam;
-
+    public GameObject panel_insertTheCorrectCard;
+    public GameObject keycard_inserted;
     public bool inTrigger;
 
     public string openText = "Insert KeyCard to Open door";
@@ -53,18 +54,20 @@ public class DoorBedroomScript : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 2))
         {
             if (hit.collider.gameObject.tag == "door_Bedroom" || hit.collider.gameObject.tag == "slot_Bedroom")
-            {
-                _animator.SetBool("BedroomSlot_showError", true);
+            {              
                 inTrigger = true;
                 UpdatePanelText();
                 openPanel.SetActive(true);
+            }else
+            {
+
             }
         }
         else
-        {
-            _animator.SetBool("BedroomSlot_showError", false);
+        {            
             inTrigger = false;
             openPanel.SetActive(false);
+            panel_insertTheCorrectCard.SetActive(false);
         }
     }
     //if _isInsideTrigger is true and mouse is pressed open bedroom door, show no error and deactivate the bedroom door panel
@@ -79,11 +82,21 @@ public class DoorBedroomScript : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(1))
                     {
+                        _animator.SetBool("BedroomSlot_showError", true);
                         _animator.SetBool("BedroomSlot_showNoError", true);
                         _animator.SetBool("OpenDoorBedroom", true);
                         openPanel.SetActive(false);
                         openPanel = null;
+                        keycard_inserted.SetActive(true);
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
+                    }
+                }else
+                    {
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        FindObjectOfType<SFX_Manager>().Play("error");
+                        _animator.SetBool("BedroomSlot_showError", true);
+                        panel_insertTheCorrectCard.SetActive(true);
                     }
                 }
             }

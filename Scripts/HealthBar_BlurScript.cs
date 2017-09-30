@@ -15,13 +15,17 @@ public class HealthBar_BlurScript : MonoBehaviour {
 
     public void ShowBlur()
     {
+
         StartCoroutine(OnOff_Healthblur());
+
     }
 
-    IEnumerator OnOff_Healthblur()
+    public IEnumerator OnOff_Healthblur()
     {
+
         barRedBlur.enabled = true;
         yield return new WaitForSeconds(0.10f);
         barRedBlur.enabled = false;
+
     }
 }

@@ -9,6 +9,9 @@ public class Terminal_1Script : MonoBehaviour {
     public GameObject interf;//interface effect
     public GameObject pointerToBridge;
     public GameObject pointerToTerminal;
+    public GameObject keycard_inserted;
+    public ParticleSystem bridgeEntranceEff;
+    public GameObject panel_insertTheCorrectCard;
 
     public bool inTrigger;
     public string openText = "Insert keycard to activate Terminal";
@@ -52,7 +55,7 @@ public class Terminal_1Script : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "slot_Terminal1" || hit.collider.gameObject.tag == "screen_Terminal1")
             {
-                _animator.SetBool("Terminal1Slot_Error", true);
+                
                 inTrigger = true;
                 UpdatePanelText();
                 openPanel.SetActive(true);
@@ -60,7 +63,7 @@ public class Terminal_1Script : MonoBehaviour {
         }
         else
         {
-            _animator.SetBool("Terminal1Slot_Error", false);
+            panel_insertTheCorrectCard.SetActive(false);            
             inTrigger = false;
             openPanel.SetActive(false);
         }
@@ -78,6 +81,7 @@ public class Terminal_1Script : MonoBehaviour {
                     if (Input.GetMouseButtonDown(1))
                     {
                         FindObjectOfType<SFX_Manager>().Play("openInterface");
+                        _animator.SetBool("Terminal1Slot_Error", true);
                         _animator.SetBool("Terminal1Slot_NoError", true);
                         _animator.SetBool("Terminal_On", true);
                         openPanel.SetActive(false);
@@ -85,8 +89,18 @@ public class Terminal_1Script : MonoBehaviour {
                         interf.SetActive(true);
                         interfaceHasAlreadyBeenActivated = true;
                         BridgeActivationScript.bridgeIsActiv = true;
+                        bridgeEntranceEff.Play();
                         pointerToBridge.SetActive(true);
                         pointerToTerminal.SetActive(false);
+                        keycard_inserted.SetActive(true);
+                    }
+                }else
+                {
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        FindObjectOfType<SFX_Manager>().Play("error");
+                        _animator.SetBool("Terminal1Slot_Error", true);
+                        panel_insertTheCorrectCard.SetActive(true);
                     }
                 }
             }

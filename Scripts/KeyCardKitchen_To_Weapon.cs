@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
+
 public class KeyCardKitchen_To_Weapon : MonoBehaviour {
 
-    
+    public Transform Player;
     public GameObject openPanel = null;
     public GameObject shownMinimizedKeycard004;
     public Camera fpsCam;
+    public ParticleSystem computerLocationEff;
 
+    public Image pauseBackground;
+    public Image successKeycards;
 
     public string openText = "Take key card";
     public string closeText = "";
@@ -77,8 +83,19 @@ public class KeyCardKitchen_To_Weapon : MonoBehaviour {
                     openPanel.SetActive(false);// panel is invincible
                     shownMinimizedKeycard004.SetActive(true);
 
-                    Timer.countKeycards -= 1;
+                    Timer.countKeycards += 1;
                     FindObjectOfType<SFX_Manager>().Play("gotItem");
+
+                    computerLocationEff.Play();
+
+
+                    pauseBackground.gameObject.SetActive(true);
+                    successKeycards.gameObject.SetActive(true);
+                    Time.timeScale = 0; //stop every movement around the enviroment
+                    Player.GetComponent<FirstPersonController>().enabled = false; //stop the player from moving
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true; // show cursor
+                    IsPause.escape_buttonsEnabled = false; // disable the pause button
                 }
             }
         }

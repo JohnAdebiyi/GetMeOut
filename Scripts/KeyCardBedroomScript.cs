@@ -73,7 +73,7 @@ public class KeyCardBedroomScript : MonoBehaviour {
                     Destroy(GameObject.FindWithTag("Keycard_Bedroom"));
                     openPanel.SetActive(false);// panel is invincible
                     shownMinimizedKeycard.SetActive(true);
-                    Timer.countKeycards -= 1;
+                    Timer.countKeycards += 1;
                     FindObjectOfType<SFX_Manager>().Stop("wardrobeOpen");
                     FindObjectOfType<SFX_Manager>().Play("gotItem");
                 }

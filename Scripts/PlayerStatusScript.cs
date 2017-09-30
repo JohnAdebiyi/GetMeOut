@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -26,6 +27,7 @@ public class PlayerStatusScript : MonoBehaviour
     public GameObject isDeadBackground;
     public Button buttonClickRestartCheckPoint;
     public GameObject blackFadeInOUtImage_CheckPoint;
+    public ParticleSystem respawnParticles;
 
 
 
@@ -77,6 +79,8 @@ public class PlayerStatusScript : MonoBehaviour
     //when checkpoint button is clicked
     public void OnButtonClick_RestartCheckPoint()
     {
+        StartCoroutine(RespawnParticles());
+
         blackFadeInOUtImage_CheckPoint.SetActive(true);
         bar.fillAmount = CheckPoint.currentHealth;
         actualHealth = bar.fillAmount * 100f;// multiply by 100 -> example. (actualHealth)97.000 = (bar.fillAmount)0.97 * 100
@@ -123,7 +127,12 @@ public class PlayerStatusScript : MonoBehaviour
         }
     }
 
-
+    IEnumerator RespawnParticles()
+    {
+        respawnParticles.Play();
+        yield return new WaitForSeconds(3f);
+        respawnParticles.Stop();
+    }
 
     void Update()
     {

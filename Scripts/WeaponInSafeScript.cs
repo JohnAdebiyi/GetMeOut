@@ -13,13 +13,17 @@ public class WeaponInSafeScript : MonoBehaviour
     public GameObject weaponInSafe;
     public GameObject weaponIcon;
     public Camera fpsCam;
+    public ParticleSystem eyeEffect; //activate the eye effect only when the weapon has been taken
 
     public Image introGunBackground;
+    public Image pauseBackground;
     public Image introWeapon;
     public Button closeIntro;
     public Transform Player;
 
     public Image pause_ButtonInfoWeapon;// show button in the pause panel when weapon has been recieved
+
+    public Image tutorial1;
 
     public string openText = "Take item";
     public string closeText = "";
@@ -89,9 +93,11 @@ public class WeaponInSafeScript : MonoBehaviour
                     weapon.SetActive(true);// display weapon
                     weaponIcon.SetActive(true);// display weaponIcons
                     EnemyAIScript.isOutside = true;
+                    eyeEffect.Play();
 
-                   pause_ButtonInfoWeapon.gameObject.SetActive(true);
+                    pause_ButtonInfoWeapon.gameObject.SetActive(true);
 
+                    pauseBackground.gameObject.SetActive(true);
                     introGunBackground.gameObject.SetActive(true);
                     introWeapon.gameObject.SetActive(true);
                     Time.timeScale = 0; //stop every movement around the enviroment
@@ -99,6 +105,10 @@ public class WeaponInSafeScript : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true; // show cursor
                     IsPause.escape_buttonsEnabled = false; // disable the pause button
+
+                    tutorial1.gameObject.SetActive(false);// dont show tutorial 1 in the pause options
+
+                    IsPause.weapon_instructionStarted = true;
                 }
             }
         }
@@ -109,6 +119,7 @@ public class WeaponInSafeScript : MonoBehaviour
     {
         FindObjectOfType<SFX_Manager>().Play("buttonSound");
 
+        pauseBackground.gameObject.SetActive(false);
         introGunBackground.gameObject.SetActive(false);
         introWeapon.gameObject.SetActive(false);
 

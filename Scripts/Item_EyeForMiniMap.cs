@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
+
 public class Item_EyeForMiniMap : MonoBehaviour {
     public GameObject openPanel = null;
     public Camera fpsCam;
@@ -13,6 +16,15 @@ public class Item_EyeForMiniMap : MonoBehaviour {
     public GameObject pointerToEnemy_Yellow4;//activate only the yellow  pointer
 
 
+    public Image pauseBackground;
+    public Image objectivBackground;
+    public Button closeObjectiv2;
+    public Button nextObjectiv2;
+    public Image objectiv_pointers;
+    public Transform Player;
+
+    public Image tutorial2;
+
     public bool inTrigger;
     public string openText = "Take Item";
     public string closeText = "";
@@ -23,7 +35,6 @@ public class Item_EyeForMiniMap : MonoBehaviour {
     void Start ()
     {
         _animator = GetComponent<Animator>();
-
     }
 
 
@@ -91,6 +102,21 @@ public class Item_EyeForMiniMap : MonoBehaviour {
                     pointerToEnemy_Yellow2.SetActive(true);
                     pointerToEnemy_Yellow3.SetActive(true);
                     pointerToEnemy_Yellow4.SetActive(true);
+
+                    objectivBackground.gameObject.SetActive(true);
+                    objectiv_pointers.gameObject.SetActive(true);
+
+                    closeObjectiv2.gameObject.SetActive(true);
+                    nextObjectiv2.gameObject.SetActive(true);
+
+                    tutorial2.gameObject.SetActive(true);// show tutorial 2 in the pause options
+
+                    Time.timeScale = 0; //stop every movement around the enviroment
+                    Player.GetComponent<FirstPersonController>().enabled = false; //stop the player from moving
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true; // show cursor
+                    IsPause.escape_buttonsEnabled = false; // disable the pause button
+                    Objectiv2.objectiv2_Started = true;
                 }
             }
         }

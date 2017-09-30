@@ -58,6 +58,7 @@ public class WeaponGunScript : MonoBehaviour {
     public GameObject gunReloading;
     public Renderer rendGun;
 
+
     //enable speech and weapon functions only when weapon gets activated
     void Awake()
     {
@@ -79,11 +80,11 @@ public class WeaponGunScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //---------------------------------------------------Weapon Bob
+        //-------------------------------------------------Weapon Bob
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
-            weaponGun_Bob.Play("WeaponGun_BobVertical");
-            weaponGun_Bob.speed = 1f;
+            weaponGun_Bob.Play("WeaponGunOleinnick_BobVertical");
+            weaponGun_Bob.speed = 0.8f;
         }
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))//onrelease
         {
@@ -92,8 +93,8 @@ public class WeaponGunScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
-            weaponGun_Bob.Play("WeaponGun_BobHorizontal");
-            weaponGun_Bob.speed = 1f;
+            weaponGun_Bob.Play("WeaponGunOleinnick_BobHorizontal");
+            weaponGun_Bob.speed = 0.8f;
         }
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))//onrelease
         {
@@ -121,7 +122,7 @@ public class WeaponGunScript : MonoBehaviour {
             if (Input.GetButtonDown("Fire1"))//left mouse
             {
                 shoot();
-                _animator.Play("WeaponGun_moveBack", -1, 0f);
+                _animator.Play("WeaponGunOleinnick_moveBack", -1, 0f);
                 FindObjectOfType<SFX_Manager>().Play("laserSound");
 
             }
@@ -141,7 +142,7 @@ public class WeaponGunScript : MonoBehaviour {
         reloadingText.enabled = true; // show reloading text
         FindObjectOfType<SFX_Manager>().Play("reloading");
 
-        //_animator.Play("WeaponGun_ReloadingStart", -1, 0f);
+        ;
         gunReloading.SetActive(true);
         rendGun.enabled = false;
 
@@ -150,7 +151,7 @@ public class WeaponGunScript : MonoBehaviour {
         
         rendGun.enabled = true;
         gunReloading.SetActive(false);
-        //_animator.Play("WeaponGun_ReloadingStop", -1, 0f);
+
 
         FindObjectOfType<SFX_Manager>().Stop("reloading");
         reloadingText.enabled = false;// disable reloading text
@@ -250,7 +251,7 @@ public class WeaponGunScript : MonoBehaviour {
             }
 
             shoot();
-            _animator.Play("WeaponGun_moveBack", -1, 0f);
+            _animator.Play("WeaponGunOleinnick_moveBack", -1, 0f);
             FindObjectOfType<SFX_Manager>().Play("laserSound");
 
         }

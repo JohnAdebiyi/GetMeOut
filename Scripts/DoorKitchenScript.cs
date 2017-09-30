@@ -10,6 +10,8 @@ public class DoorKitchenScript : MonoBehaviour {
     public GameObject destroyKeycardMinimalized003;// important! using Tag to destroy
     public GameObject destroyKeycardIsActiveMinimalized003;// important! using Tag to destroy
     public Camera fpsCam;
+    public GameObject panel_insertTheCorrectCard;
+    public GameObject keycard_inserted;
 
     public bool inTrigger;
 
@@ -60,7 +62,6 @@ public class DoorKitchenScript : MonoBehaviour {
             {
                 inTrigger = true;
                 UpdatePanelText();
-                _animator.SetBool("KitchenSlot_showError", true);
 
                 if (keyCard_To_Laptop == true)//if key card is set to true from Laptop_GameScript2.KeyCard_To_Laptop
                 {
@@ -75,8 +76,7 @@ public class DoorKitchenScript : MonoBehaviour {
         else
         {
             inTrigger = false;
-            _animator.SetBool("KitchenSlot_showError", false);
-
+            panel_insertTheCorrectCard.SetActive(false);
             if (keyCard_To_Laptop == true)
             {
                 openPanel_go_Do_Activation.SetActive(false);
@@ -101,9 +101,20 @@ public class DoorKitchenScript : MonoBehaviour {
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
                         _animator.SetBool("openKitchenDoor", true);
                         openPanel.SetActive(false);// panel is invincible
+                        _animator.SetBool("KitchenSlot_showError", true);
                         _animator.SetBool("KitchenSlot_showNoError", true);
                         openPanel = null;
                         Laptop_GameScript_2.keyCard_To_Laptop = false;// dont show the game on the laptop
+                        keycard_inserted.SetActive(true);
+                    }
+                    else
+                    {
+                        if (Input.GetMouseButtonDown(1))
+                        {
+                            FindObjectOfType<SFX_Manager>().Play("error");
+                            _animator.SetBool("KitchenSlot_showError", true);
+                            panel_insertTheCorrectCard.SetActive(true);
+                        }
                     }
                 }
             }
