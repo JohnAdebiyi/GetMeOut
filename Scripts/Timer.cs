@@ -6,6 +6,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 //the keycardscountertext and imageTimer panel disappear when player takes the weapon. WeaponInSafeScript.cs
 public class Timer : MonoBehaviour {
 
+    public Transform Player;
+    public Image pauseBackground;
+    public Image successKeycards;
+
     public GameObject isDead_Panel;
     public GameObject isDeadBackground;
     public Transform player;
@@ -20,8 +24,19 @@ public class Timer : MonoBehaviour {
     private float timeAmount = 300;
     private float time;
 
-    public static int countKeycards = 4;
+    public static int countKeycards = 0;
     private bool hasCollectedAll_Cards= false;
+
+    private bool timeRemaingWarning1 = true;
+    private bool timeRemaingWarning2 = true;
+    private bool timeRemaingWarning3 = true;
+    private bool timeRemaingWarning4 = true;
+    private bool timeRemaingWarningSeconds = true;
+    public GameObject timeRemaining_Warning1min;
+    public GameObject timeRemaining_Warning2min;
+    public GameObject timeRemaining_Warning3min;
+    public GameObject timeRemaining_Warning4min;
+
 
     void Start ()
     {
@@ -37,13 +52,24 @@ public class Timer : MonoBehaviour {
 
     void Success()
     {
-        keycardsCounterText.text = "Keycards Remaining: " + countKeycards.ToString();
-        if (countKeycards == 0)
+        keycardsCounterText.text = "Keycards found: " + countKeycards.ToString();
+        if (countKeycards == 4)
         {
             hasCollectedAll_Cards = true;
             timeText.color = Color.yellow;
 
             StartCoroutine(SwitchOffPanels());
+
+            FindObjectOfType<SFX_Manager>().Stop("4min");
+            FindObjectOfType<SFX_Manager>().Stop("3min");
+            FindObjectOfType<SFX_Manager>().Stop("2min");
+            FindObjectOfType<SFX_Manager>().Stop("1min");
+            FindObjectOfType<SFX_Manager>().Stop("10sec");
+            timeRemaining_Warning1min.SetActive(false);
+            timeRemaining_Warning2min.SetActive(false);
+            timeRemaining_Warning3min.SetActive(false);
+            timeRemaining_Warning4min.SetActive(false);
+
 
         }
     }
@@ -81,12 +107,106 @@ public class Timer : MonoBehaviour {
             string min = ((int)time / 60).ToString();
             string sec = (time % 60).ToString("f2");
 
-            timeText.text = min + ":" + sec;
+            timeText.text = min + ":" + sec;           
         }
-        //Debug.Log(countKeycards);
 
+
+        if (timeRemaingWarningSeconds)
+        {
+            if (time <= 11)
+            {
+                Debug.Log("10sec");
+                FindObjectOfType<SFX_Manager>().Play("10sec");
+                timeRemaingWarningSeconds = false;
+            }
+        }
+
+        if (timeRemaingWarning4)
+        {
+            if (time <= 240)
+            {
+                Debug.Log("4:00min");
+                FindObjectOfType<SFX_Manager>().Play("4min");
+                StartCoroutine(TimeRemaining_Warning4min());
+                timeRemaingWarning4 = false;
+            }
+        }
+
+        if (timeRemaingWarning3)
+        {
+            if (time <= 180)
+            {
+                Debug.Log("3:00min");
+                FindObjectOfType<SFX_Manager>().Play("3min");
+                StartCoroutine(TimeRemaining_Warning3min());
+                timeRemaingWarning3 = false;
+            }
+        }
+
+        if (timeRemaingWarning2)
+        {
+            if (time <= 120)
+            {
+                Debug.Log("2:00min");
+                FindObjectOfType<SFX_Manager>().Play("2min");
+                StartCoroutine(TimeRemaining_Warning2min());
+                timeRemaingWarning2 = false;
+            }
+        }
+
+        if (timeRemaingWarning1)
+        {
+            if (time <= 60)
+            {
+                Debug.Log("1:00min");
+                FindObjectOfType<SFX_Manager>().Play("1min");
+                StartCoroutine(TimeRemaining_Warning1min());
+                timeRemaingWarning1 = false;
+            }
+        }
+        
 
         Failed();
         Success();
+    }
+
+    IEnumerator TimeRemaining_Warning1min()
+    {
+        timeRemaining_Warning1min.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        timeRemaining_Warning1min.SetActive(false);
+    }
+    IEnumerator TimeRemaining_Warning2min()
+    {
+        timeRemaining_Warning2min.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        timeRemaining_Warning2min.SetActive(false);
+    }
+    IEnumerator TimeRemaining_Warning3min()
+    {
+        timeRemaining_Warning3min.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        timeRemaining_Warning3min.SetActive(false);
+    }
+    IEnumerator TimeRemaining_Warning4min()
+    {
+        timeRemaining_Warning4min.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        timeRemaining_Warning4min.SetActive(false);
+    }
+
+
+    public void CloseSuccessKeycards()
+    {
+        FindObjectOfType<SFX_Manager>().Play("buttonSound");
+
+        pauseBackground.gameObject.SetActive(false);
+        successKeycards.gameObject.SetActive(false);
+
+        Time.timeScale = 1;     //allow movements around the enviroment
+        Player.GetComponent<FirstPersonController>().enabled = true;// allow player movement
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        IsPause.escape_buttonsEnabled = true; // enable the pause button
     }
 }
