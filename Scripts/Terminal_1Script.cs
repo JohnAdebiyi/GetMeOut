@@ -20,6 +20,7 @@ public class Terminal_1Script : MonoBehaviour {
     public static bool keyCardTerminal1 = false;// if player has a card set to true
     private bool interfaceHasAlreadyBeenActivated = false;
 
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
     // Use this for initialization
     void Start()
     {
@@ -93,6 +94,8 @@ public class Terminal_1Script : MonoBehaviour {
                         pointerToBridge.SetActive(true);
                         pointerToTerminal.SetActive(false);
                         keycard_inserted.SetActive(true);
+
+                        update = false;
                     }
                 }else
                 {
@@ -147,9 +150,12 @@ public class Terminal_1Script : MonoBehaviour {
    // Update is called once per frame
    void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
-        DestroyPanel();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+            DestroyPanel();
+        }
     }
 
 }

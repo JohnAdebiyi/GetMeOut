@@ -36,6 +36,8 @@ public class Laptop_GameScript_2 : MonoBehaviour
     [Space]
     private float damage = 0.03f;// 0.03 * 100 = 3 damage units
 
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
+
     //keypad input
     string laptop_number = null;
     public InputField laptop_myNumber = null;
@@ -199,6 +201,7 @@ public class Laptop_GameScript_2 : MonoBehaviour
                             correct = true;
                             FindObjectOfType<SFX_Manager>().Play("correctAnswer");
                             computerLocationEff.Stop();
+                            update = false;
                         }
                         else if (laptop_myNumber.text == "")
                         {
@@ -255,8 +258,11 @@ public class Laptop_GameScript_2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+        }
     }
 
 
@@ -293,6 +299,7 @@ public class Laptop_GameScript_2 : MonoBehaviour
                 laptop_OpenPanel2 = null;
                 correct = true;
                 computerLocationEff.Stop();
+                update = false;
             }
 
             else

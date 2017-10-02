@@ -15,6 +15,7 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
 
     public static bool keyCardBedroom;
 
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
     // Use this for initialization
     void Start()
@@ -78,6 +79,8 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
                     FindObjectOfType<SFX_Manager>().Play("doorOpen");
 
                     computerLocationEff.Play();
+
+                    update = false;
                 }
             }
         }
@@ -87,7 +90,10 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+        }
     }
 }

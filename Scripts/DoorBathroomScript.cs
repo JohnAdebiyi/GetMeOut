@@ -18,6 +18,8 @@ public class DoorBathroomScript : MonoBehaviour {
 
     public static bool keyCard_To_Bathroom;
 
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
+
 
     // Use this for initialization
     void Start()
@@ -87,6 +89,7 @@ public class DoorBathroomScript : MonoBehaviour {
                         openPanel = null;
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
                         keycard_inserted.SetActive(true);
+                        update = false;
                     }
                 }
                 else
@@ -116,8 +119,11 @@ public class DoorBathroomScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
-        DestroyPanel();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+            DestroyPanel();
+        }
     }
 }

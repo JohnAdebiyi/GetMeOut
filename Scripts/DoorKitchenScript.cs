@@ -20,7 +20,7 @@ public class DoorKitchenScript : MonoBehaviour {
 
     private bool _isOpen = false;
 
-
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
     public static bool keyCard_To_Laptop; // key card is now activ for the door to open from Laptop_GameScript2.cs => DoorKitchenScript.keycardIsActiv = true
     public static bool keycardIsActiv;// dont show key needs to be activated since the answer is correct from Laptop_GameScript3.cs => DoorKitchenScript.KeyCard_To_Laptop = false
@@ -106,6 +106,7 @@ public class DoorKitchenScript : MonoBehaviour {
                         openPanel = null;
                         Laptop_GameScript_2.keyCard_To_Laptop = false;// dont show the game on the laptop
                         keycard_inserted.SetActive(true);
+                        update = false;
                     }
                     else
                     {
@@ -138,8 +139,11 @@ public class DoorKitchenScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
-        DestroyPanel();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+            DestroyPanel();
+        }
     }
 }

@@ -40,6 +40,8 @@ public class Laptop_GameScript : MonoBehaviour {
     string laptop_number = null;
     public InputField laptop_myNumber = null;
 
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
+
     // Use this for initialization
     void Start()
     {
@@ -201,6 +203,8 @@ public class Laptop_GameScript : MonoBehaviour {
                         FindObjectOfType<SFX_Manager>().Play("correctAnswer");
 
                         computerLocationEff.Stop();
+
+                        update = false;
                     }
                     else if (laptop_myNumber.text == "")
                     {
@@ -245,8 +249,11 @@ public class Laptop_GameScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+        }
     }
 
 
@@ -286,6 +293,8 @@ public class Laptop_GameScript : MonoBehaviour {
                 _animator.SetBool("Laptop_on", false);
 
                 computerLocationEff.Stop();
+
+                update = false;
             }
             
             else
