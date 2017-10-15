@@ -12,7 +12,7 @@ A short video game with a mixture of escape the room and first person shooter el
 ![laptop](https://user-images.githubusercontent.com/31805013/31589946-8ac194fc-b209-11e7-89a1-021344976fa3.jpg)
 ![laptopquestion](https://user-images.githubusercontent.com/31805013/31589948-9003da2e-b209-11e7-946b-5509447266fa.jpg)
 ![openbook](https://user-images.githubusercontent.com/31805013/31589953-97a5639c-b209-11e7-833e-988cccc6035f.jpg)
-![laptopquestion](https://user-images.githubusercontent.com/31805013/31589960-a618b4f6-b209-11e7-9751-bc32bd93af7f.jpg)
+![safe](https://user-images.githubusercontent.com/31805013/31590259-5e7b8926-b20d-11e7-8b4f-0fa64a0d42b8.jpg)
 ![keycardslot](https://user-images.githubusercontent.com/31805013/31589965-ac55aebe-b209-11e7-8baf-cafcd2e10648.jpg)
 ![microwave](https://user-images.githubusercontent.com/31805013/31589970-b37dff84-b209-11e7-9600-740787b61fbe.jpg)
 ![toilet](https://user-images.githubusercontent.com/31805013/31589971-b9bd03ae-b209-11e7-88d9-67f1740c1576.jpg)
