@@ -20,11 +20,6 @@ public class ChestDrawerOpenScript : MonoBehaviour
 
     private float time;//timer for letting paper appear after 0.7 sec after drawer has been opened
 
-
-
-
-
-
     // Use this for initialization
     void Start()
     {
@@ -32,8 +27,6 @@ public class ChestDrawerOpenScript : MonoBehaviour
         paper.SetActive(false);
         time = Time.time;
     }
-
-
 
     // for checking if the drawer panel is activ
     private bool IsOpenPanelActive
@@ -53,7 +46,6 @@ public class ChestDrawerOpenScript : MonoBehaviour
             panelText.text = _isOpen ? closeText : openText;//if _isOpen is true return closeText or else return openText
         }
     }
-
 
     // if raycast hits the chestdrawer collider, set _isInsideTrigger to true else set to false
     void _RaycastHit()
@@ -86,8 +78,6 @@ public class ChestDrawerOpenScript : MonoBehaviour
             openPanel_ToReadPaper.SetActive(false);
         }
     }
-
-
 
     void InsideTrigger()
     {

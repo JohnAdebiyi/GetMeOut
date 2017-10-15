@@ -55,7 +55,7 @@ public class DoorKitchenScript : MonoBehaviour {
                 inTrigger = true;
                 UpdatePanelText();
 
-                if (keyCard_To_Laptop == true)//if key card is set to true from Laptop_GameScript2.KeyCard_To_Laptop
+                if (keyCard_To_Laptop)//if key card is set to true from Laptop_GameScript2.KeyCard_To_Laptop
                 {
                     openPanel_go_Do_Activation.SetActive(true);
                 }
@@ -69,7 +69,7 @@ public class DoorKitchenScript : MonoBehaviour {
         {
             inTrigger = false;
             panel_insertTheCorrectCard.SetActive(false);
-            if (keyCard_To_Laptop == true)
+            if (keyCard_To_Laptop)
             {
                 openPanel_go_Do_Activation.SetActive(false);
             }
@@ -84,11 +84,11 @@ public class DoorKitchenScript : MonoBehaviour {
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (inTrigger == true)
+            if (inTrigger)
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                    if (keycardIsActiv == true)
+                    if (keycardIsActiv)
                     {
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
                         _animator.SetBool("openKitchenDoor", true);
@@ -121,7 +121,7 @@ public class DoorKitchenScript : MonoBehaviour {
         destroyKeycardIsActiveMinimalized003 = GameObject.FindGameObjectWithTag("keycardIsActive03");
 
 
-        if (_animator.GetBool("openKitchenDoor") == true)
+        if (_animator.GetBool("openKitchenDoor"))
         {
             Destroy(destroyKeycardMinimalized003);
             Destroy(destroyKeycardIsActiveMinimalized003);

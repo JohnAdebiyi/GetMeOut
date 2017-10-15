@@ -59,7 +59,7 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (inTrigger == true)
+            if (inTrigger)
             {
                 if (Input.GetMouseButtonDown(1))
                 {
