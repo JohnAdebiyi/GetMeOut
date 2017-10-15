@@ -3,15 +3,17 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class Keypad_BedRoom_SAFE_Script : MonoBehaviour
 {
-
-    public GameObject openPanel_Keypad = null;
     public Animator _animator;
-    public GameObject destroyPasswordMinimalized;//using tag to destroy
+
     public Camera fpsCam;
+
     public Collider keycard_Terminal1;// activate the keycard collider when door is opened
 
+    public GameObject openPanel_Keypad;
+    public GameObject destroyPasswordMinimalized;//using tag to destroy
 
     public string currentPassword_BedRoom;
+
     public bool bedroom_inTrigger;
     public bool bedroom_doorOpended;
     public bool bedroom_keyPadScreen;

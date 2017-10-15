@@ -14,13 +14,15 @@ public class IsPause : MonoBehaviour
 
 
     public Image keybaordInstructions;
+    public Image keybaordInstructionsWeapon;
     public Button keyboardInstructionsExit;
-
+    public Button keybaordInstructionsWeaponExit;
 
     public Image objectiv_keycards; //tutorials
     public Image objectiv_slots; //tutorials
     public Image objectiv_laptop; //tutorials
     public Image objectiv_help; //tutorials
+    public Image objectiv_framerate;
     public Button closeObjectiv;//tutorials
     public Button nextObjectiv;//tutorials
     public Button prevObjectiv;//tutorials
@@ -28,6 +30,7 @@ public class IsPause : MonoBehaviour
     public Image objectiv_pointers; //tutorials2
     public Image objectiv_map; //tutorials2
     public Image objectiv_help2; //tutorials2
+    public Image objectiv_framerate2;
     public Button closeObjectiv2;//tutorials2
     public Button nextObjectiv2;//tutorials2
     public Button prevObjectiv2;//tutorials
@@ -90,7 +93,12 @@ public class IsPause : MonoBehaviour
         keybaordInstructions.gameObject.SetActive(true);
         onPause_Panel.SetActive(false); //close the pause panel
     }
-
+    public void KeyBoardInstructionsWeapon()
+    {
+        FindObjectOfType<SFX_Manager>().Play("buttonSound");
+        keybaordInstructionsWeapon.gameObject.SetActive(true);
+        onPause_Panel.SetActive(false); //close the pause panel
+    }
     public void WeaponInformation()
     {
         FindObjectOfType<SFX_Manager>().Play("buttonSound");
@@ -162,6 +170,21 @@ public class IsPause : MonoBehaviour
         Cursor.visible = true; // show cursor 
         AudioListener.pause = true;
     }
+    public void ButtonExitKeyBoardWeaponPanel()
+    {
+        FindObjectOfType<SFX_Manager>().Play("buttonSound");
+        options_Panel.SetActive(false);
+        onPause_Panel.gameObject.SetActive(true);
+        pauseBackground.gameObject.SetActive(true);
+        keybaordInstructionsWeapon.gameObject.SetActive(false);
+
+
+        Time.timeScale = 0; //stop every movement around the enviroment
+        Player.GetComponent<FirstPersonController>().enabled = false; //stop the player from moving
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; // show cursor 
+        AudioListener.pause = true;
+    }
     void Update()
     {
 
@@ -207,7 +230,7 @@ public class IsPause : MonoBehaviour
 
                 // if the option panel is opended and the pause panel is closed and the escape key is pressed
                 //then close the option panel
-                if (options_Panel.gameObject.activeInHierarchy == true && onPause_Panel.gameObject.activeInHierarchy == false)
+                if (options_Panel.gameObject.activeInHierarchy && onPause_Panel.gameObject.activeInHierarchy == false)
                 {
                     options_Panel.SetActive(false);
                     onPause_Panel.gameObject.SetActive(false);
@@ -218,7 +241,7 @@ public class IsPause : MonoBehaviour
                     Cursor.visible = false;
                 }
 
-                if (infoWeapon.gameObject.activeInHierarchy == true && onPause_Panel.gameObject.activeInHierarchy == true)
+                if (infoWeapon.gameObject.activeInHierarchy && onPause_Panel.gameObject.activeInHierarchy)
                 {
                     options_Panel.SetActive(false);
                     onPause_Panel.gameObject.SetActive(false);
@@ -241,9 +264,21 @@ public class IsPause : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
+                if (keybaordInstructionsWeapon.gameObject.activeInHierarchy)
+                {
+                    options_Panel.SetActive(false);
+                    onPause_Panel.gameObject.SetActive(false);
+                    keybaordInstructionsWeapon.gameObject.SetActive(false);
+                    pauseBackground.gameObject.SetActive(false);
+                    Time.timeScale = 1;
+                    Player.GetComponent<FirstPersonController>().enabled = true;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
 
-                if (objectiv_keycards.gameObject.activeInHierarchy == true || objectiv_laptop.gameObject.activeInHierarchy == true ||
-                    objectiv_slots.gameObject.activeInHierarchy == true || objectiv_help.gameObject.activeInHierarchy == true)
+                if (objectiv_keycards.gameObject.activeInHierarchy || objectiv_laptop.gameObject.activeInHierarchy ||
+                    objectiv_slots.gameObject.activeInHierarchy || objectiv_help.gameObject.activeInHierarchy 
+                    || objectiv_framerate.gameObject.activeInHierarchy)
                 {
                     options_Panel.SetActive(false);
                     onPause_Panel.gameObject.SetActive(false);
@@ -253,6 +288,7 @@ public class IsPause : MonoBehaviour
                     objectiv_keycards.gameObject.SetActive(false);
                     objectiv_laptop.gameObject.SetActive(false);
                     objectiv_slots.gameObject.SetActive(false);
+                    objectiv_framerate.gameObject.SetActive(false);
 
                     closeObjectiv.gameObject.SetActive(false);
                     prevObjectiv.gameObject.SetActive(false);
@@ -263,8 +299,8 @@ public class IsPause : MonoBehaviour
                     Cursor.lockState = CursorLockMode.Locked;
                 }
 
-                if (objectiv_pointers.gameObject.activeInHierarchy == true || objectiv_map.gameObject.activeInHierarchy == true ||
-                    objectiv_help2.gameObject.activeInHierarchy == true)
+                if (objectiv_pointers.gameObject.activeInHierarchy || objectiv_map.gameObject.activeInHierarchy ||
+                    objectiv_help2.gameObject.activeInHierarchy || objectiv_framerate2.gameObject.activeInHierarchy)
                 {
                     options_Panel.SetActive(false);
                     onPause_Panel.gameObject.SetActive(false);
@@ -274,6 +310,7 @@ public class IsPause : MonoBehaviour
                     objectiv_pointers.gameObject.SetActive(false);
                     objectiv_map.gameObject.SetActive(false);
                     objectiv_help2.gameObject.SetActive(false);
+                    objectiv_framerate2.gameObject.SetActive(false);
 
                     closeObjectiv2.gameObject.SetActive(false);
                     prevObjectiv2.gameObject.SetActive(false);

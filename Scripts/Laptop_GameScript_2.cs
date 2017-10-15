@@ -27,9 +27,9 @@ public class Laptop_GameScript_2 : MonoBehaviour
     public ParticleSystem computerLocationEff;
     [Space]
     [Space]
-    private bool laptop_isInsideTrigger = false;
+    private bool laptop_isInsideTrigger;
     public string currentAnswer = "12";
-    private bool correct = false;
+    private bool correct;
     public static bool keyCard_To_Laptop;
     public static bool putOffPanel_Game2;// in case this gamescript wasnt played then dont show the panel 
     [Space]
@@ -39,8 +39,8 @@ public class Laptop_GameScript_2 : MonoBehaviour
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
     //keypad input
-    string laptop_number = null;
-    public InputField laptop_myNumber = null;
+    string laptop_number;
+    public InputField laptop_myNumber;
 
     // Use this for initialization
     void Start()
@@ -61,7 +61,7 @@ public class Laptop_GameScript_2 : MonoBehaviour
             if (hit.collider.gameObject.tag == "Game_Laptop")
             {
                 laptop_isInsideTrigger = true;
-                if (keyCard_To_Laptop == true)
+                if (keyCard_To_Laptop)
                 {
                     laptop_OpenPanel2.SetActive(true);
                     _animator.SetBool("Laptop_on", true);
@@ -99,7 +99,7 @@ public class Laptop_GameScript_2 : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
             //if(true)
-            if (keyCard_To_Laptop == true)
+            if (keyCard_To_Laptop)
             {
 
                 if (laptop_isInsideTrigger)

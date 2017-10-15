@@ -3,28 +3,18 @@ using UnityEngine.EventSystems;
 public class KeyCardToilet_To_Kitchen : MonoBehaviour {
 
 
-    
-    public GameObject openPanel = null;
+    public Camera fpsCam;   
+
+    public GameObject openPanel;
     public GameObject shownMinimizedKeycard003;
-    public Camera fpsCam;
+
     public ParticleSystem computerLocationEff;
 
     public string openText = "Take key card";
     public string closeText = "";
 
-    private bool _isOpen = false;
+    private bool _isOpen;
     public bool inTrigger;
-
-
-
-    // for checking if the key card panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
 
     // for updating the key card panel text

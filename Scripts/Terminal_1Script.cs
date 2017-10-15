@@ -3,39 +3,34 @@ using UnityEngine.EventSystems;
 public class Terminal_1Script : MonoBehaviour {
 
     public Animator _animator;
-    public GameObject openPanel = null;
-    public GameObject destroyKeycardMinimalized005;// important! using Tag to destroy // for destroying the panel keycard obtainded
+
     public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject destroyKeycardMinimalized005;// important! using Tag to destroy // for destroying the panel keycard obtainded
     public GameObject interf;//interface effect
     public GameObject pointerToBridge;
     public GameObject pointerToTerminal;
     public GameObject keycard_inserted;
-    public ParticleSystem bridgeEntranceEff;
     public GameObject panel_insertTheCorrectCard;
 
-    public bool inTrigger;
+    public ParticleSystem bridgeEntranceEff;
+
     public string openText = "Insert keycard to activate Terminal";
     public string closeText = "";
-    private bool _isOpen = false;
-    public static bool keyCardTerminal1 = false;// if player has a card set to true
-    private bool interfaceHasAlreadyBeenActivated = false;
 
+    public bool inTrigger;
+    public static bool keyCardTerminal1;// if player has a card set to true
+    private bool interfaceHasAlreadyBeenActivated;
+    private bool _isOpen;
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
+	
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();        
     }
 
-
-    // for checking if the terminal panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the terminal panel text 
     private void UpdatePanelText()
@@ -75,7 +70,7 @@ public class Terminal_1Script : MonoBehaviour {
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (inTrigger == true)
+            if (inTrigger)
             {
                 if (keyCardTerminal1)
                 {
@@ -114,7 +109,7 @@ public class Terminal_1Script : MonoBehaviour {
     void DestroyPanel()
     {
         destroyKeycardMinimalized005 = GameObject.FindGameObjectWithTag("keycard005");
-        if (_animator.GetBool("Terminal_On") == true)
+        if (_animator.GetBool("Terminal_On"))
         {
             Destroy(destroyKeycardMinimalized005);            
         }

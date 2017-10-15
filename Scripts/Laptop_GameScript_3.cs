@@ -27,17 +27,17 @@ public class Laptop_GameScript_3 : MonoBehaviour
     public ParticleSystem computerLocationEff;
     [Space]
     [Space]
-    private bool laptop_isInsideTrigger = false;
+    private bool laptop_isInsideTrigger;
     public string currentAnswer3 = "24";
-    public bool correct = false;
+    public bool correct;
     public static bool keyCard_To_Laptop;
     [Space]
     [Space]
     private float damage = 0.05f;// 0.05 * 100 = 5 damage units
 
     //keypad input
-    string laptop_number = null;
-    public InputField laptop_myNumber = null;
+    string laptop_number;
+    public InputField laptop_myNumber;
 
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
@@ -59,7 +59,7 @@ public class Laptop_GameScript_3 : MonoBehaviour
             if (hit.collider.gameObject.tag == "Game_Laptop")
             {
                 laptop_isInsideTrigger = true;
-                if (keyCard_To_Laptop == true)
+                if (keyCard_To_Laptop)
                 {
 
                     laptop_OpenPanel3.SetActive(true);
@@ -90,7 +90,7 @@ public class Laptop_GameScript_3 : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (keyCard_To_Laptop == true)
+            if (keyCard_To_Laptop)
             {
 
                 if (laptop_isInsideTrigger)

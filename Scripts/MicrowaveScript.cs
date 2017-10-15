@@ -6,18 +6,18 @@ public class MicrowaveScript : MonoBehaviour {
 
 
     public Animator _animator;
-    public GameObject openPanel = null;
 
     public Collider microwaveCollider;
+
     public Camera fpsCam;
 
-    private bool _isInsideTrigger = false;
+    public GameObject openPanel;
 
     public string openText = "Press the left mouse button to open slider";
     public string closeText = "Press the left mouse button to close slider";
 
-    private bool _isOpen = false;
-    
+    private bool _isOpen;
+    private bool _isInsideTrigger;
 
     // Use this for initialization
     void Start ()

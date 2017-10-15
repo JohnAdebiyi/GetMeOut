@@ -5,16 +5,15 @@ public class Shielded_EnemyScript : MonoBehaviour {
 
     public GameObject enemy;                     // when shield is destroyed change the tag(shielded_enemy) of monster(4) to tag(enemy), 
                                                  //so that if(hit.collider.tag == "enemy") can be executed in WeaponGunScript.cs
-
     public ParticleSystem shieldEffectSharpRing;
     public ParticleSystem shieldEffectParticles;
     public ParticleSystem shieldEffectGlowingRing;
 
-
+    public Image barShield;
 
     public float maxHealthShield = 30f;
     private float currentHealthShield = 0f;
-    public Image barShield;
+
 
     void Start()
     {
@@ -39,6 +38,7 @@ public class Shielded_EnemyScript : MonoBehaviour {
         if (currentHealthShield <= 0f)
         {
             enemy.tag = "enemy";// execute WeaponGunscripts.cs -> if(hit.collider.tag == "enemy")
+            Take_OutsideItemsScript.paperIsActive = true;
         }
     }
 

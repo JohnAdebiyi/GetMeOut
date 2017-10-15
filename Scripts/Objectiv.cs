@@ -5,18 +5,20 @@ using UnityStandardAssets.Characters.FirstPerson;
 //goes to objektive_Tutorial_Manager
 public class Objectiv : MonoBehaviour {
 
+    public Button closeObjectiv;
+    public Button nextObjectiv;
+    public Button prevObjectiv;
+
     public Image objectiv_keycards;
     public Image objectiv_slots;
     public Image objectiv_laptop;
     public Image objectiv_help;
+    public Image objectiv_framerate;
+
     public GameObject onPause_Panel;
-
-
     public Image pauseBackground;
     public Image objectivBackground;
-    public Button closeObjectiv;
-    public Button nextObjectiv;
-    public Button prevObjectiv;
+
     public Transform Player;
 
     //public static bool pauseIsPressed;
@@ -51,6 +53,7 @@ public class Objectiv : MonoBehaviour {
             objectiv_slots.gameObject.SetActive(false);
             objectiv_laptop.gameObject.SetActive(false);
             objectiv_help.gameObject.SetActive(false);
+            objectiv_framerate.gameObject.SetActive(false);
 
             closeObjectiv.gameObject.SetActive(false);
             nextObjectiv.gameObject.SetActive(false);
@@ -72,6 +75,7 @@ public class Objectiv : MonoBehaviour {
             objectiv_keycards.gameObject.SetActive(false);
             objectiv_laptop.gameObject.SetActive(false);
             objectiv_slots.gameObject.SetActive(false);
+            objectiv_framerate.gameObject.SetActive(false);
 
             closeObjectiv.gameObject.SetActive(false);
             prevObjectiv.gameObject.SetActive(false);
@@ -114,9 +118,19 @@ public class Objectiv : MonoBehaviour {
             objectiv_help.gameObject.SetActive(true);
 
             closeObjectiv.gameObject.SetActive(true);
+            nextObjectiv.gameObject.SetActive(true);
+            prevObjectiv.gameObject.SetActive(true);
+        }
+        else if (objectiv_help.gameObject.activeInHierarchy == true)
+        {
+            objectiv_help.gameObject.SetActive(false);
+            objectiv_framerate.gameObject.SetActive(true);
+
+            closeObjectiv.gameObject.SetActive(true);
             nextObjectiv.gameObject.SetActive(false);
             prevObjectiv.gameObject.SetActive(true);
-        }else
+        }
+        else
         {
             //do nothing
         }
@@ -134,7 +148,7 @@ public class Objectiv : MonoBehaviour {
         FindObjectOfType<SFX_Manager>().Play("buttonSound");
 
 
-        if (objectiv_slots.gameObject.activeInHierarchy == true)
+        if (objectiv_slots.gameObject.activeInHierarchy)
         {
             objectiv_slots.gameObject.SetActive(false);
             objectiv_keycards.gameObject.SetActive(true);
@@ -143,16 +157,24 @@ public class Objectiv : MonoBehaviour {
             nextObjectiv.gameObject.SetActive(true);
         }
 
-        if (objectiv_laptop.gameObject.activeInHierarchy == true)
+        if (objectiv_laptop.gameObject.activeInHierarchy)
         {
             objectiv_laptop.gameObject.SetActive(false);
             objectiv_slots.gameObject.SetActive(true);
         }
 
-        if (objectiv_help.gameObject.activeInHierarchy == true)
+        if (objectiv_help.gameObject.activeInHierarchy)
         {
             objectiv_help.gameObject.SetActive(false);
             objectiv_laptop.gameObject.SetActive(true);
+
+            prevObjectiv.gameObject.SetActive(true);
+            nextObjectiv.gameObject.SetActive(true);
+        }
+        if (objectiv_framerate.gameObject.activeInHierarchy)
+        {
+            objectiv_framerate.gameObject.SetActive(false);
+            objectiv_help.gameObject.SetActive(true);
 
             prevObjectiv.gameObject.SetActive(true);
             nextObjectiv.gameObject.SetActive(true);

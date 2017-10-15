@@ -7,12 +7,15 @@ public class WeaponInSafeScript : MonoBehaviour
 {
 
     public Animator _animator;
-    public GameObject openPanel = null;
+
+    public Camera fpsCam;
+
+    public GameObject openPanel;
     public GameObject outsideDoorIsOpened_Panel;
     public GameObject weapon;
     public GameObject weaponInSafe;
     public GameObject weaponIcon;
-    public Camera fpsCam;
+
     public ParticleSystem eyeEffect; //activate the eye effect only when the weapon has been taken
 
     public Image introGunBackground;
@@ -27,24 +30,15 @@ public class WeaponInSafeScript : MonoBehaviour
 
     public string openText = "Take item";
     public string closeText = "";
+
     public bool inTrigger;
-    private bool _isOpen = false;
+    private bool _isOpen;
 
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
     }
-
-
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
-
 
     private void UpdatePanelText()
     {

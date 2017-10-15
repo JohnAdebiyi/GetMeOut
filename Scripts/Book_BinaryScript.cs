@@ -8,10 +8,6 @@ public class Book_BinaryScript : MonoBehaviour {
     public GameObject bookBinary;
     public Camera fpsCam;
 
-    void Start()
-    {
-        //bookBinary.enabled = false;
-    }
 
     // if raycast hits the open book collider
     void Update()

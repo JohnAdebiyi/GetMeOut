@@ -6,18 +6,24 @@ using System.IO;
 
 public class MainMenu : MonoBehaviour {
 
+    public Animator anim;// used for fading in
+
+    public Button ButtonKeyboardInstr;
+
     public GameObject loadingScreen;
-    public Slider slider;
-    public Text progressText;
+
     public Image keybaordInstructionsMainmenu;
     public Image logo;
     public Image blackFadeInOUtImage;//used for fading in
-    public Animator anim;// used for fading in
-    public Button ButtonKeyboardInstr;
+
+    public Slider slider;
+
     private SettingManagerMainMenu settingManagerMainMenu;
+
+    public Text progressText;
+
     public static bool exitToMenuWasPressed;// no need to reset in ResetStaticVariables()// pressed from game
     public bool fullScreenIsOn;
-
 
 
     void Start()
@@ -28,7 +34,7 @@ public class MainMenu : MonoBehaviour {
         AudioListener.pause = false;
 
         //if fullscreen on splash screen is toggled on, then set fullscreen in the json file to true else to false using bool fullScreenIsOn
-        if(Screen.fullScreen == true)
+        if(Screen.fullScreen)
         {
             fullScreenIsOn = true;
         }else
@@ -48,9 +54,9 @@ public class MainMenu : MonoBehaviour {
 
             settingManagerMainMenu.gameSettings.fullscreen = Screen.fullScreen = fullScreenIsOn;
 
-            QualitySettings.masterTextureLimit = settingManagerMainMenu.gameSettings.textureQuality = 1;
-            QualitySettings.antiAliasing = settingManagerMainMenu.gameSettings.antialiasing = 1;
-            QualitySettings.vSyncCount = settingManagerMainMenu.gameSettings.vSync = 0;
+            QualitySettings.masterTextureLimit = settingManagerMainMenu.gameSettings.textureQuality = 2;//0-high,1-medium,2-low
+            QualitySettings.antiAliasing = settingManagerMainMenu.gameSettings.antialiasing = 1;//2-high,1-medium,0-low
+            QualitySettings.vSyncCount = settingManagerMainMenu.gameSettings.vSync = 0;//2-high,1-medium,0-low
 
             float _volumeMusic = settingManagerMainMenu.gameSettings.musicVolume = 1;
             settingManagerMainMenu.musicSourceMainMenu.Volume(_volumeMusic);
@@ -149,6 +155,7 @@ public class MainMenu : MonoBehaviour {
         if (exitToMenuWasPressed)
         {            
             blackFadeInOUtImage.gameObject.SetActive(false);
+            //exitToMenuWasPressed = false;
         }
     }    
 }

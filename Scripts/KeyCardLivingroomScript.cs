@@ -3,10 +3,10 @@ using UnityEngine.EventSystems;
 public class KeyCardLivingroomScript : MonoBehaviour
 {
 
-    public bool inTrigger;
-    public GameObject openPanel = null;
-    public GameObject shownMinimizedKeycard;
     public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject shownMinimizedKeycard;
     public GameObject keycard;
 
     public ParticleSystem computerLocationEff;// in case first game wasnt played then stop the effect when keycard has been obtained
@@ -14,17 +14,9 @@ public class KeyCardLivingroomScript : MonoBehaviour
     public string openText = "Take key card";
     public string closeText = "";
 
-    private bool _isOpen = false;
+    public bool inTrigger;
+    private bool _isOpen;
 
-
-    // for checking if the key card panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the key card panel text
     private void UpdatePanelText()

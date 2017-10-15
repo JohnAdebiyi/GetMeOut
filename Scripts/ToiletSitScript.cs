@@ -5,18 +5,19 @@ public class ToiletSitScript : MonoBehaviour
 
 
     public Animator _animator;
-    public GameObject openPanel = null;
-    public Collider toiletSitCollider;
-    public GameObject keycard_Toilet;
+
     public Camera fpsCam;
 
-    private bool _isInsideTrigger = false;
+    public Collider toiletSitCollider;
+
+    public GameObject openPanel;
+    public GameObject keycard_Toilet;
 
     public string openText = "Open toilet seat";
     public string closeText = "";
 
-    private bool _isOpen = false;
-
+    private bool _isOpen;
+    private bool _isInsideTrigger;
 
 
     // Use this for initialization

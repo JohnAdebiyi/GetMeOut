@@ -6,18 +6,20 @@ using UnityStandardAssets.Characters.FirstPerson;
 //the keycardscountertext and imageTimer panel disappear when player takes the weapon. WeaponInSafeScript.cs
 public class Timer : MonoBehaviour {
 
-    public Transform Player;
+
+
     public Image pauseBackground;
     public Image successKeycards;
+    public Image imageTimer;
 
     public GameObject isDead_Panel;
     public GameObject isDeadBackground;
-    public Transform player;
 
     public GameObject keycardsRemainingCounter_Panel;
     public GameObject Time_Icon_Panel;
 
-    public Image imageTimer;
+    public Transform player;
+
     public Text keycardsCounterText;
     public Text timeText;
 
@@ -25,7 +27,7 @@ public class Timer : MonoBehaviour {
     private float time;
 
     public static int countKeycards = 0;
-    private bool hasCollectedAll_Cards= false;
+    private bool hasCollectedAll_Cards;
 
     private bool timeRemaingWarning1 = true;
     private bool timeRemaingWarning2 = true;
@@ -204,7 +206,7 @@ public class Timer : MonoBehaviour {
         successKeycards.gameObject.SetActive(false);
 
         Time.timeScale = 1;     //allow movements around the enviroment
-        Player.GetComponent<FirstPersonController>().enabled = true;// allow player movement
+        player.GetComponent<FirstPersonController>().enabled = true;// allow player movement
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         IsPause.escape_buttonsEnabled = true; // enable the pause button

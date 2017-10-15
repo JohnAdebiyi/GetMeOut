@@ -5,20 +5,18 @@ public class DoorBedroomScript : MonoBehaviour
 {
 
     public Animator _animator;
-    public GameObject openPanel = null;
+    public GameObject openPanel;
     public GameObject destroyKeycardMinimalized001;// important! using Tag to destroy // for destroying the panel keycard obtainded
     public Camera fpsCam;
     public GameObject panel_insertTheCorrectCard;
     public GameObject keycard_inserted;
-    public bool inTrigger;
 
     public string openText = "Insert KeyCard to Open door";
     public string closeText = "";
 
-    private bool _isOpen = false;
-
+    public bool inTrigger;
+    private bool _isOpen;
     public static bool keyCardBedroom;
-
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
 
@@ -26,16 +24,6 @@ public class DoorBedroomScript : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();        
-    }
-
-
-    // for checking if the bedroom door panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
     }
 
     // for updating the bedroom door panel text 
@@ -77,9 +65,8 @@ public class DoorBedroomScript : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (inTrigger == true)
+            if (inTrigger)
             {
-
                 if (keyCardBedroom)
                 {
                     if (Input.GetMouseButtonDown(1))
@@ -110,7 +97,7 @@ public class DoorBedroomScript : MonoBehaviour
     void DestroyPanel()
     {
         destroyKeycardMinimalized001 = GameObject.FindGameObjectWithTag("keycard001");
-        if (_animator.GetBool("OpenDoorBedroom") == true)
+        if (_animator.GetBool("OpenDoorBedroom"))
         {
             Destroy(destroyKeycardMinimalized001);
         }

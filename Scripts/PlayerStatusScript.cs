@@ -6,31 +6,34 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerStatusScript : MonoBehaviour
 {
 
-    //public static bool alive = true;
-    private float actualHealth;// used for converting float to int for the health text
-    private int temp;// used for converting flaot to int for the health text
-    private bool isRestarting = false;
-    public bool buttonEnabled = false;
 
+    private float actualHealth;// used for converting float to int for the health text
+
+    private int temp;// used for converting flaot to int for the health text
+
+    private bool isRestarting;
+    public bool buttonEnabled;
 
     // the current health is saved on every frame Update to respawnhealth and passed 
     //THEN to CheckPoint.cs => currentHealth = PlayerStatusScript.respawnHealth; when player enter the checkpoint trigger.
     //When player gets respawned, bar.fillamount then takes the value from = CheckPoint.currentHealth;
     public static float respawnHealth;
 
+    public Button buttonClickRestartCheckPoint;
 
-    private HealthBar_BlurScript healthbar_blur;//off on healthbar blur when damage is taken
-    public Image bar;
-    public Text healthText;
-    public Transform Player;
     public GameObject isDead_Panel;
     public GameObject isDeadBackground;
-    public Button buttonClickRestartCheckPoint;
     public GameObject blackFadeInOUtImage_CheckPoint;
+
+    private HealthBar_BlurScript healthbar_blur;//off on healthbar blur when damage is taken
+
+    public Image bar;
+
     public ParticleSystem respawnParticles;
 
+    public Text healthText;
 
-
+    public Transform Player;
 
 
     void Start()

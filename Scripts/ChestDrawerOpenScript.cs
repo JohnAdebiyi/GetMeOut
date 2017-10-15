@@ -4,16 +4,18 @@ public class ChestDrawerOpenScript : MonoBehaviour
 {
 
     public Animator _animator;
-    public GameObject paper;//paper.png
-    public GameObject panel_Chestdrawer = null;//open drawer, close drawer
-    public GameObject openPanel_ToReadPaper;
+
     public Camera fpsCam;
+
+    public GameObject paper;//paper.png
+    public GameObject panel_Chestdrawer;//open drawer, close drawer
+    public GameObject openPanel_ToReadPaper;
     public GameObject Keypad_Bedroom;
 
-    private bool _isInsideTrigger = false;
     public string openText = "open drawer";
     public string closeText = "close drawer";
 
+    private bool _isInsideTrigger;
     private bool _isOpen = false;
 
     private float time;//timer for letting paper appear after 0.7 sec after drawer has been opened
@@ -104,7 +106,9 @@ public class ChestDrawerOpenScript : MonoBehaviour
                     FindObjectOfType<SFX_Manager>().Play("chestDrawer");                    
                 }
             }
-            if (_animator.GetBool("open") == true)
+
+
+            if (_animator.GetBool("open"))
             {
                 if (Time.time >= time + 0.7f)// time starts running when the drawer is opened. if time reaches 0.7sec then show paper
                 {

@@ -16,10 +16,4 @@ public class DoorOutsideDeactivatePanel : MonoBehaviour
         outsideDoorIsOpened.SetActive(false); // deactivates the panel "door to go outside is opened" which was activated in weaponScript.cs => OutsideDoorIsOpened.SetActive(true);
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

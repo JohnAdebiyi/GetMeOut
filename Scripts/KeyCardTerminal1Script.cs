@@ -2,31 +2,21 @@
 using UnityEngine.EventSystems;
 public class KeyCardTerminal1Script : MonoBehaviour {
 
-
-    public GameObject openPanel = null;
-    public GameObject shownMinimizedKeycard;
     public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject shownMinimizedKeycard;
     public GameObject keycard;
     public GameObject miniMap_keycard;
     public GameObject pointerToKeycardTerminal;
     public GameObject pointerToTerminal;
 
-    public bool inTrigger;
     public string openText = "Take key card";
     public string closeText = "";
-    private bool _isOpen = false;
 
+    public bool inTrigger;
+    private bool _isOpen;
 
-
-
-    // for checking if the key card panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the key card panel text
     private void UpdatePanelText()

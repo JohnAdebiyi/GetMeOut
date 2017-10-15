@@ -5,36 +5,30 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class KeyCardKitchen_To_Weapon : MonoBehaviour {
 
-    public Transform Player;
-    public GameObject openPanel = null;
-    public GameObject shownMinimizedKeycard004;
     public Camera fpsCam;
-    public ParticleSystem computerLocationEff;
+
+    public GameObject openPanel;
+    public GameObject shownMinimizedKeycard004;
 
     public Image pauseBackground;
     public Image successKeycards;
+
+    public ParticleSystem computerLocationEff;
+
+    public Transform Player;
 
     public string openText = "Take key card";
     public string closeText = "";
 
 
-    private bool _isOpen = false;
+    private bool _isOpen;
     public bool inTrigger;
 
-
-    // for checking if the key card panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the key card panel text
     private void UpdatePanelText()
     {
-        UnityEngine.UI.Text panelText = openPanel.transform.FindChild("Text").GetComponent<UnityEngine.UI.Text>();
+        Text panelText = openPanel.transform.FindChild("Text").GetComponent<Text>();
         if (panelText != null)
         {
             panelText.text = _isOpen ? closeText : openText;//if _isOpen is true return closeText or else return openText

@@ -2,28 +2,16 @@
 using UnityEngine.EventSystems;
 public class KeyCardBedroomScript : MonoBehaviour {
 
-
-    public GameObject openPanel = null;
-    public GameObject shownMinimizedKeycard = null;
     public Camera fpsCam;
 
-
+    public GameObject openPanel;
+    public GameObject shownMinimizedKeycard;
 
     public string openText = "Take key card";
     public string closeText = "";
+
     public bool inTrigger;
-    private bool _isOpen = false;
-
-   
-
-    // for checking if the key card panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
+    private bool _isOpen;
 
     // for updating the key card panel text
     private void UpdatePanelText()
@@ -80,10 +68,6 @@ public class KeyCardBedroomScript : MonoBehaviour {
             }
         }
     }
-
-
-
-
 
 
     void Update()

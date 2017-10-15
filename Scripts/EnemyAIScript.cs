@@ -37,9 +37,11 @@ public class EnemyAIScript : MonoBehaviour
     public GameObject pointerToEnemy_Red;//for changing the color
     public GameObject pointerToEnemy_Yellow;//for changing the color
 
-    private float showTime;//For Debugging. used to show how much time has passed in the console
     private string state = "chooseA_SpotToWalk";
-    public static bool isOutside = false; // the enemies are activated when the player takes the weapon. This is set in WeaponInSafeScript.cs
+
+    public static bool isOutside; // the enemies are activated when the player takes the weapon. This is set in WeaponInSafeScript.cs
+
+    private float showTime;//For Debugging. used to show how much time has passed in the console
     private float wait;//when player out runs the enemy, the enemy chases the player for some time and looses interest
     //private float standStill;// when enemy reaches path position, enemy should stay still for a certain amount of time and move after
 
@@ -89,7 +91,7 @@ public class EnemyAIScript : MonoBehaviour
     public void CheckSight()
     {
 
-        if (isOutside == true)
+        if (isOutside)
         {
 
             RaycastHit rayHit;
@@ -123,7 +125,7 @@ public class EnemyAIScript : MonoBehaviour
                 //print("hit" + rayHit.collider.gameObject.name); //show the name of the objects that were hit with the raycast
 
 
-                if (rayHit.collider.gameObject.name == "FPSController")
+                if (rayHit1.collider.gameObject.name == "FPSController")
                 {
 
                     // if state variable hasnt been initiated with "inPlainSight", which it hasnt, then overwrite state variable with "chase". 
@@ -144,7 +146,7 @@ public class EnemyAIScript : MonoBehaviour
                 //print("hit" + rayHit.collider.gameObject.name); //show the name of the objects that were hit with the raycast
 
 
-                if (rayHit.collider.gameObject.name == "FPSController")
+                if (rayHit2.collider.gameObject.name == "FPSController")
                 {
 
                     // if state variable hasnt been initiated with "inPlainSight", which it hasnt, then overwrite state variable with "chase". 
@@ -165,7 +167,7 @@ public class EnemyAIScript : MonoBehaviour
                     //print("hit" + rayHit.collider.gameObject.name); //show the name of the objects that were hit with the raycast
 
 
-                    if (rayHit.collider.gameObject.name == "FPSController")
+                    if (rayHit3.collider.gameObject.name == "FPSController")
                     {
 
                         // if state variable hasnt been initiated with "inPlainSight", which it hasnt, then overwrite state variable with "chase". 
@@ -186,7 +188,7 @@ public class EnemyAIScript : MonoBehaviour
                     //print("hit" + rayHit.collider.gameObject.name); //show the name of the objects that were hit with the raycast
 
 
-                    if (rayHit.collider.gameObject.name == "FPSController")
+                    if (rayHit4.collider.gameObject.name == "FPSController")
                     {
 
                         // if state variable hasnt been initiated with "inPlainSight", which it hasnt, then overwrite state variable with "chase". 

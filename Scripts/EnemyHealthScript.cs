@@ -4,15 +4,15 @@ public class EnemyHealthScript : MonoBehaviour {
 
     public float maxHealth = 15f; // health of the enemy
     private float currentHealth = 0f;
-    private static int enemiesDead = 0;
 
+    public static int enemiesDead = 0;
     public static int enemiesDeadCounter = 5;
+
     public Text enemiesCounterText;
     public GameObject enemiesCounterPanel;
 
-    public Image bar;
     public GameObject destroyedVersion; //using Prefab MonsterNormalAnimFall (Animation) or MonsterNormalNoAnimFall Rigidbody(physics)
-    public GameObject displayItem;// for displaying the cross health or paper
+    public GameObject displayItem;// for displaying the cross health or paper//prefab
 
     public GameObject crossHair_InRangeGreen;// for deactivating the cross hair when enemy dies
     public GameObject crossHair_InRangeBlack;// for deactivating the cross hair when enemy dies
@@ -22,7 +22,11 @@ public class EnemyHealthScript : MonoBehaviour {
 
     public GameObject pointerToKeycardTerminal;
 
+    public Image bar;
+
     public ParticleSystem houseCaveEntranceEff;
+
+
     void Start()
     {
         //Image bar - full bar at start
@@ -51,8 +55,6 @@ public class EnemyHealthScript : MonoBehaviour {
 
     void Die()
     {
-
-        
         Instantiate(displayItem, transform.position, transform.rotation);// display cross health or paper
         Instantiate(destroyedVersion, transform.position, transform.rotation);//display the enemy falling to the ground
         Destroy(gameObject);// destroy the enemy
@@ -81,7 +83,6 @@ public class EnemyHealthScript : MonoBehaviour {
 
         enemiesDeadCounter -= 1;
         enemiesCounterText.text = "Enemies: " + enemiesDeadCounter.ToString();//health text
+
     }
-
-
 }

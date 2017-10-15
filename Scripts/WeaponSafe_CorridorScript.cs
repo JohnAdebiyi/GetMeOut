@@ -5,46 +5,39 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
 {
 
     public Animator _animator;
-    public GameObject openPanel = null;
 
-    public GameObject openPanel_go_Do_Activation = null;
+    public Collider weaponInSafe_Collider; // weaponInSafe and weapon_slot_Screen Gameobject needs to be assigned
+
+    public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject openPanel_go_Do_Activation;
     public GameObject destroyKeycardMinimalized004;// important! using Tag to destroy
     public GameObject destroyKeycardIsActiveMinimalized004;// important! using Tag to destroy
-    public Collider weaponInSafe_Collider; // weaponInSafe and weapon_slot_Screen Gameobject needs to be assigned
-    public Camera fpsCam;
 
     public GameObject panel_insertTheCorrectCard;
     public GameObject keycard_inserted;
 
-    public bool inTrigger;
+    public GameObject buttonKeyBoard;
+    public GameObject buttonKeyBoardWeapon;
 
     public string openText = "Insert keycard to open";
     public string closeText = "";
 
-    private bool _isOpen = false;
-
-
+    private bool _isOpen;
+    public bool inTrigger;
 
     public static bool keyCard_To_Laptop; // key card is now activ for the door to open from Laptop_GameScript3.cs => WeaponCorridorScript.keycardIsActiv = true
     public static bool keycardIsActiv;// dont show key needs to be activated since the answer is correct from Laptop_GameScript3.cs => WeaponCorridorScript.KeyCard_To_Laptop = false
 
-
+    private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
     // Use this for initialization
     void Start()
     {
         _animator = GetComponent<Animator>();
         weaponInSafe_Collider.enabled = false;
-
     }
 
-    // for checking if the panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating panel text 
     private void UpdatePanelText()
@@ -74,7 +67,7 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
             {
                 inTrigger = true;
                 UpdatePanelText();
-                if (keyCard_To_Laptop == true)//if key card is set to true from Laptop_GameScript3.KeyCard_To_Laptop
+                if (keyCard_To_Laptop)//if key card is set to true from Laptop_GameScript3.KeyCard_To_Laptop
                 {
                     panel_insertTheCorrectCard.SetActive(false);
                     openPanel_go_Do_Activation.SetActive(true);
@@ -89,7 +82,7 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
         {
             panel_insertTheCorrectCard.SetActive(false);
             inTrigger = false;
-            if (keyCard_To_Laptop == true)//if player has the keycard deactivate the go do activation panel
+            if (keyCard_To_Laptop)//if player has the keycard deactivate the go do activation panel
             {
                 panel_insertTheCorrectCard.SetActive(false);
                 openPanel_go_Do_Activation.SetActive(false);
@@ -107,12 +100,12 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
-            if (inTrigger == true)
+            if (inTrigger)
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                  //if (true)
-                     if (keycardIsActiv == true)
+                   //if (true)
+                     if (keycardIsActiv)
                     {
                         _animator.SetBool("openWeaponSafe", true);// open the safe
                         StartCoroutine(openSafe());// wait for a certain amount of time till safe is opened and then enable the the weaponInSafe_Collider
@@ -123,7 +116,11 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
                         openPanel = null;
                         Laptop_GameScript_3.keyCard_To_Laptop = false; // deactivate panel "game"
                         FindObjectOfType<SFX_Manager>().Play("doorOpen");
-                        keycard_inserted.SetActive(true);                        
+                        keycard_inserted.SetActive(true);
+                        update = false;
+
+                        buttonKeyBoard.SetActive(false);//pause button
+                        buttonKeyBoardWeapon.SetActive(true);//pause button
                     }
                     else
                     {
@@ -146,7 +143,7 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
         destroyKeycardIsActiveMinimalized004 = GameObject.FindGameObjectWithTag("keycardIsActive04");
 
 
-        if (_animator.GetBool("openWeaponSafe") == true)
+        if (_animator.GetBool("openWeaponSafe"))
         {
             Destroy(destroyKeycardMinimalized004); // destroy the mini panel keycard obtainded
             Destroy(destroyKeycardIsActiveMinimalized004);// destroy the mini panel keycard is activ
@@ -156,9 +153,12 @@ public class WeaponSafe_CorridorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _RaycastHit();
-        InsideTrigger();
-        DestroyPanel();
+        if (update)
+        {
+            _RaycastHit();
+            InsideTrigger();
+            DestroyPanel();
+        }
     }
 }
 

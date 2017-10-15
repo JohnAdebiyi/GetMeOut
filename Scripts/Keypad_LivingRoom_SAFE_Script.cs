@@ -4,20 +4,24 @@ using UnityEngine.EventSystems;
 public class Keypad_LivingRoom_SAFE_Script : MonoBehaviour
 {
 
-    public GameObject openPanel_Keypad;
     public Animator _animator;
-    public GameObject destroyPasswordMinimalized;//using tag to destroy
+
     public Collider keycard;
 
+    public GameObject openPanel_Keypad;
+    public GameObject destroyPasswordMinimalized;//using tag to destroy
+
     public Camera fpsCam;
+
     public string currentPassword_LivingRoom;
+
     public bool inTrigger;
     public bool doorOpended;
     public bool keyPadScreen;
 
     //keypad input
     string number = null;
-    public InputField myNumber = null;
+    public InputField myNumber;
 
     // Use this for initialization
     void Start()

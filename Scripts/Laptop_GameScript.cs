@@ -26,8 +26,8 @@ public class Laptop_GameScript : MonoBehaviour {
     public ParticleSystem computerLocationEff;
     [Space]
     [Space]
-    private bool correct = false;
-    private bool laptop_isInsideTrigger = false;
+    private bool correct;
+    private bool laptop_isInsideTrigger;
     public string currentAnswer = "6";
     public static bool putOffPanel_Game1;// in case this gamescript wasnt played then dont show the panel 
     [Space]
@@ -37,8 +37,8 @@ public class Laptop_GameScript : MonoBehaviour {
     [Space]
     [Space]
     //keypad input
-    string laptop_number = null;
-    public InputField laptop_myNumber = null;
+    string laptop_number;
+    public InputField laptop_myNumber;
 
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
@@ -63,7 +63,7 @@ public class Laptop_GameScript : MonoBehaviour {
         {
             if (hit.collider.gameObject.tag == "Game_Laptop")
             {
-                if (putOffPanel_Game1 == true)// in case this gamescript wasnt played then dont show the panel
+                if (putOffPanel_Game1)// in case this gamescript wasnt played then dont show the panel
                 {
                     laptop_OpenPanel.SetActive(false);
                 }

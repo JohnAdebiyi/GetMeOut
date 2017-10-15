@@ -15,7 +15,7 @@ public class BridgeActivationScript : MonoBehaviour {
     public GameObject pointerToBridge;
     public GameObject pointerToCave;
 
-    public static bool bridgeIsActiv = false;
+    public static bool bridgeIsActiv;
 
 	// Update is called once per frame
 	void Update ()

@@ -4,32 +4,35 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class Item_EyeForMiniMap : MonoBehaviour {
-    public GameObject openPanel = null;
+
+    private Animator _animator;
+
+    public Button closeObjectiv2;
+    public Button nextObjectiv2;
+
     public Camera fpsCam;
+
+    public GameObject openPanel;
     public GameObject miniMapCam;
     public GameObject enemyCounter_Panel;
-    private Animator _animator;
     public GameObject pointerToEnemy_Yellow;//activate only the yellow  pointer
     public GameObject pointerToEnemy_Yellow1;//activate only the yellow  pointer
     public GameObject pointerToEnemy_Yellow2;//activate only the yellow  pointer
     public GameObject pointerToEnemy_Yellow3;//activate only the yellow  pointer
     public GameObject pointerToEnemy_Yellow4;//activate only the yellow  pointer
 
-
     public Image pauseBackground;
     public Image objectivBackground;
-    public Button closeObjectiv2;
-    public Button nextObjectiv2;
     public Image objectiv_pointers;
-    public Transform Player;
-
     public Image tutorial2;
 
-    public bool inTrigger;
+    public Transform Player;
+ 
     public string openText = "Take Item";
     public string closeText = "";
-    private bool _isOpen = false;
 
+    public bool inTrigger;
+    private bool _isOpen;
 
     // Use this for initialization
     void Start ()
@@ -38,20 +41,10 @@ public class Item_EyeForMiniMap : MonoBehaviour {
     }
 
 
-
-    // for checking if the item panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
-
     // for updating the item panel text
     private void UpdatePanelText()
     {
-        UnityEngine.UI.Text panelText = openPanel.transform.FindChild("Text").GetComponent<UnityEngine.UI.Text>();
+        Text panelText = openPanel.transform.FindChild("Text").GetComponent<Text>();
         if (panelText != null)
         {
             panelText.text = _isOpen ? closeText : openText;//if _isOpen is true return closeText or else return openText

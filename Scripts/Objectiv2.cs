@@ -4,17 +4,19 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class Objectiv2 : MonoBehaviour {
 
-    public Image pauseBackground;
-    public Image objectivBackground;
+
     public Button closeObjectiv;
     public Button nextObjectiv;
     public Button prevObjectiv;
-    public GameObject onPause_Panel;
 
+    public GameObject onPause_Panel;
+    public Image pauseBackground;
+    public Image objectivBackground;
 
     public Image objectiv_pointers;
     public Image objectiv_map;
     public Image objectiv_help;
+    public Image objectiv_framerate;
 
     public Transform Player;
 
@@ -31,6 +33,7 @@ public class Objectiv2 : MonoBehaviour {
             objectiv_pointers.gameObject.SetActive(false);
             objectiv_map.gameObject.SetActive(false);
             objectiv_help.gameObject.SetActive(false);
+            objectiv_framerate.gameObject.SetActive(false);
 
             closeObjectiv.gameObject.SetActive(false);
             nextObjectiv.gameObject.SetActive(false);
@@ -52,6 +55,7 @@ public class Objectiv2 : MonoBehaviour {
             objectiv_pointers.gameObject.SetActive(false);
             objectiv_map.gameObject.SetActive(false);
             objectiv_help.gameObject.SetActive(false);
+            objectiv_framerate.gameObject.SetActive(false);
 
             closeObjectiv.gameObject.SetActive(false);
             nextObjectiv.gameObject.SetActive(false);
@@ -71,7 +75,7 @@ public class Objectiv2 : MonoBehaviour {
     {
             FindObjectOfType<SFX_Manager>().Play("buttonSound");
 
-            if (objectiv_pointers.gameObject.activeInHierarchy == true)
+            if (objectiv_pointers.gameObject.activeInHierarchy)
             {
                 objectiv_pointers.gameObject.SetActive(false);
                 objectiv_map.gameObject.SetActive(true);
@@ -80,18 +84,23 @@ public class Objectiv2 : MonoBehaviour {
                 closeObjectiv.gameObject.SetActive(true);
                 nextObjectiv.gameObject.SetActive(true);
             }
-            else if (objectiv_map.gameObject.activeInHierarchy == true)
+            else if (objectiv_map.gameObject.activeInHierarchy)
             {
                 objectiv_map.gameObject.SetActive(false);
                 objectiv_help.gameObject.SetActive(true);
 
                 closeObjectiv.gameObject.SetActive(true);
-                nextObjectiv.gameObject.SetActive(false);
+                nextObjectiv.gameObject.SetActive(true);
                 prevObjectiv.gameObject.SetActive(true);
             }           
-            else
+            else if (objectiv_help.gameObject.activeInHierarchy)
             {
-                //do nothing
+                objectiv_help.gameObject.SetActive(false);
+                objectiv_framerate.gameObject.SetActive(true);
+
+                closeObjectiv.gameObject.SetActive(true);
+                nextObjectiv.gameObject.SetActive(false);
+                prevObjectiv.gameObject.SetActive(true);
             }
 
 
@@ -107,7 +116,7 @@ public class Objectiv2 : MonoBehaviour {
             FindObjectOfType<SFX_Manager>().Play("buttonSound");
 
 
-            if (objectiv_map.gameObject.activeInHierarchy == true)
+            if (objectiv_map.gameObject.activeInHierarchy)
             {
                 objectiv_map.gameObject.SetActive(false);
                 objectiv_pointers.gameObject.SetActive(true);
@@ -116,10 +125,19 @@ public class Objectiv2 : MonoBehaviour {
                 nextObjectiv.gameObject.SetActive(true);
 
             }
-            if (objectiv_help.gameObject.activeInHierarchy == true)
+            if (objectiv_help.gameObject.activeInHierarchy)
             {
                 objectiv_help.gameObject.SetActive(false);
                 objectiv_map.gameObject.SetActive(true);
+
+                prevObjectiv.gameObject.SetActive(true);
+                nextObjectiv.gameObject.SetActive(true);
+
+            }
+            if (objectiv_framerate.gameObject.activeInHierarchy)
+            {
+                objectiv_framerate.gameObject.SetActive(false);
+                objectiv_help.gameObject.SetActive(true);
 
                 prevObjectiv.gameObject.SetActive(true);
                 nextObjectiv.gameObject.SetActive(true);

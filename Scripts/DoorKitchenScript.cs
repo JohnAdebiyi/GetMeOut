@@ -3,22 +3,23 @@ using UnityEngine.EventSystems;
 public class DoorKitchenScript : MonoBehaviour {
 
     public Animator _animator;
-    public GameObject openPanel = null;
- 
-    public GameObject openPanel_go_Do_Activation = null;
+
+    public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject openPanel_go_Do_Activation;
 
     public GameObject destroyKeycardMinimalized003;// important! using Tag to destroy
     public GameObject destroyKeycardIsActiveMinimalized003;// important! using Tag to destroy
-    public Camera fpsCam;
+
     public GameObject panel_insertTheCorrectCard;
     public GameObject keycard_inserted;
-
-    public bool inTrigger;
 
     public string openText = "Insert KeyCard to Open door";
     public string closeText = "";
 
-    private bool _isOpen = false;
+    public bool inTrigger;
+    private bool _isOpen;
 
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
@@ -31,15 +32,6 @@ public class DoorKitchenScript : MonoBehaviour {
         _animator = GetComponent<Animator>();
     }
 
-
-    // for checking if the kitchen door panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the kitchen door panel text
     private void UpdatePanelText()

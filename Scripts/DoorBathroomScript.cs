@@ -3,21 +3,20 @@ using UnityEngine.EventSystems;
 public class DoorBathroomScript : MonoBehaviour {
 
     public Animator _animator;
-    public GameObject openPanel = null;
-    public GameObject destroyKeycardMinimalized002;// for destroying the panel keycard obtainded
+
     public Camera fpsCam;
+
+    public GameObject openPanel;
+    public GameObject destroyKeycardMinimalized002;// for destroying the panel keycard obtainded
     public GameObject panel_insertTheCorrectCard;
     public GameObject keycard_inserted;
-
-    public bool inTrigger;
 
     public string openText = "Insert KeyCard to Open door";
     public string closeText = "";
 
-    private bool _isOpen = false;
-
+    public bool inTrigger;
     public static bool keyCard_To_Bathroom;
-
+    private bool _isOpen;
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
 
@@ -25,15 +24,6 @@ public class DoorBathroomScript : MonoBehaviour {
     void Start()
     {
         _animator = GetComponent<Animator>();
-    }
-
-    // for checking if the bathroom door panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
     }
 
     // for updating the bathroom door panel text 
@@ -75,7 +65,7 @@ public class DoorBathroomScript : MonoBehaviour {
         if (!EventSystem.current.IsPointerOverGameObject()) //stop raycast on UI clicks. when UI is activ, gameObjects arent hit with raycast.
         {
 
-            if (inTrigger == true)
+            if (inTrigger)
             {
                 if (keyCard_To_Bathroom)
                 // if (true)
@@ -110,7 +100,7 @@ public class DoorBathroomScript : MonoBehaviour {
         destroyKeycardMinimalized002 = GameObject.FindGameObjectWithTag("keycard002");
 
 
-        if (_animator.GetBool("OpenDoorBathroom") == true)
+        if (_animator.GetBool("OpenDoorBathroom"))
         {
             Destroy(destroyKeycardMinimalized002);
         }

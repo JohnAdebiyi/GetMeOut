@@ -4,18 +4,19 @@ public class WardrobeSliderRScript : MonoBehaviour
 {
 
     public Animator _animator;
-    public GameObject openPanel = null;// show panel when player gets near the wardrobeslider
-    public GameObject keycard_Bedroom; //keycard
-    public Collider wadrobeCollider;//deactivate the collider when slider is open
+
     public Camera fpsCam;// raycast
 
-    private bool _isInsideTrigger = false;
+    public Collider wadrobeCollider;//deactivate the collider when slider is open
+
+    public GameObject openPanel;// show panel when player gets near the wardrobeslider
+    public GameObject keycard_Bedroom; //keycard
 
     public string openText = "open slider";
     public string closeText = "close slider";
 
-    private bool _isOpen = false;
-
+    private bool _isOpen;
+    private bool _isInsideTrigger = false;
 
 
     // Use this for initialization

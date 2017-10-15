@@ -63,6 +63,7 @@ public class IsFinished : MonoBehaviour {
 
     void ResetStaticVariables()
     {
+        BridgeActivationScript.bridgeIsActiv = false;
         DoorBathroomScript.keyCard_To_Bathroom = false;
         DoorBedroomScript.keyCardBedroom = false;
         DoorKitchenScript.keycardIsActiv = false;
@@ -72,6 +73,7 @@ public class IsFinished : MonoBehaviour {
 
         EnemyAIScript.isOutside = false;
         EnemyHealthScript.enemiesDeadCounter = 5;//changed private to public
+        EnemyHealthScript.enemiesDead = 0;
 
         Keypad_BedRoom_SAFE_Script.enemiesAreDead = false;
 

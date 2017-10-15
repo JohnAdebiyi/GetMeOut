@@ -2,17 +2,19 @@
 public class DoorOutsideScript : MonoBehaviour {
 
     public Animator _animator;
-    public GameObject OpenPanel = null;
-    public Camera fpsCam;
-    public GameObject mouse;
 
-    public bool inTrigger;
+    public Camera fpsCam;
+
+    public GameObject OpenPanel;
+    public GameObject panel;//access to go outside denied
+    public GameObject mouse;
 
     public string openText = "access denied";
     public string closeText = "";
 
-    private bool _isOpen = false;
-    public static bool weaponObtained = false;
+    public bool inTrigger;
+    private bool _isOpen;
+    public static bool weaponObtained;
 
     // Use this for initialization
     void Start ()
@@ -20,15 +22,6 @@ public class DoorOutsideScript : MonoBehaviour {
         _animator = GetComponent<Animator>();
     }
 
-
-    // for checking if the outside door panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return OpenPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the outside door panel text
     private void UpdatePanelText()
@@ -51,7 +44,7 @@ public class DoorOutsideScript : MonoBehaviour {
             if (hit.collider.gameObject.tag == "door_Outside" || hit.collider.gameObject.tag == "slot_Outside")
             {
                             mouse.SetActive(false);
-                            if (weaponObtained == true)
+                            if (weaponObtained)
                             {
                                 //do nothing
                             }
@@ -59,14 +52,14 @@ public class DoorOutsideScript : MonoBehaviour {
                             {
                                 inTrigger = true;
                                 UpdatePanelText();
-                                OpenPanel.SetActive(true);                                
-                            }
+                                OpenPanel.SetActive(true);                                                            
+                }
             }
         }
         else
         {
                             mouse.SetActive(true);
-                            if (weaponObtained == true)
+                            if (weaponObtained)
                             {
                                 //do nothing
                             }
@@ -74,18 +67,20 @@ public class DoorOutsideScript : MonoBehaviour {
                             {
                                 inTrigger = false;
                                 OpenPanel.SetActive(false);
-                            }
+                                panel.SetActive(false);//access to go outside denied
+            }
         }
 
         //if _isInsideTrigger is true and mouse is pressed open outside door
-        if (inTrigger == true)
+        if (inTrigger)
         {
 
             if (weaponObtained == false)
             {
                 if (Input.GetMouseButtonDown(1))
                 {
-                    FindObjectOfType<SFX_Manager>().Play("error");
+                    panel.SetActive(true);//access to go outside denied 
+                    FindObjectOfType<SFX_Manager>().Play("error");                    
                     _animator.SetBool("OutsideSlot_showError", true);
                     _animator.SetBool("open_OutsideDoor", false);
                     // OpenPanel.SetActive(false);
@@ -95,7 +90,7 @@ public class DoorOutsideScript : MonoBehaviour {
         }
 
         //if weapon obtained, open the ouside door and show no slot errors
-        if (weaponObtained == true)
+        if (weaponObtained)
         {
             _animator.SetBool("OutsideSlot_showError", true);
             _animator.SetBool("OutsideSlot_showNoError", true);

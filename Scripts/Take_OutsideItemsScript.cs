@@ -3,18 +3,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class Take_OutsideItemsScript : MonoBehaviour
 {
+    public Camera fpsCam;
 
-    public GameObject openPanel = null;
+    public GameObject openPanel;
     public GameObject showpassword_Panel;//small
     public GameObject password_BigPanel;//big
-    public Camera fpsCam;
-    private PlayerStatusScript giveHealth;
+    public GameObject panel_importantItem;
 
+    private PlayerStatusScript giveHealth;
 
     public string openText = "Take item";
     public string closeText = "";
-    private bool _isOpen = false;
 
+    public static bool paperIsActive;//set activ in shielded_EnemyScript. Did this to ignore errors. Not the best solution
+    private bool _isOpen;
     private bool inTrigger;
     private bool inTrigger1;
     private bool inTrigger2;
@@ -27,15 +29,6 @@ public class Take_OutsideItemsScript : MonoBehaviour
     void Start()
     {
         giveHealth = GetComponent<PlayerStatusScript>();
-    }
-
-    // for checking if the health cross panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
     }
 
     // for updating the health cross panel text
@@ -167,6 +160,8 @@ public class Take_OutsideItemsScript : MonoBehaviour
                 {
                     StartCoroutine(ShowPassword());
                     Destroy(GameObject.FindWithTag("take_PaperOutside"));// destroy paper item
+                    GameObject.FindWithTag("panel_importantItem").SetActive(false);
+                    panel_importantItem.SetActive(false);
                     openPanel.SetActive(false);// panel is invincible
                     inTrigger4 = false;
                     FindObjectOfType<SFX_Manager>().Play("gotItem");
@@ -188,5 +183,15 @@ public class Take_OutsideItemsScript : MonoBehaviour
     {
         _RaycastHit();
         InsideTrigger();
+
+
+        if (paperIsActive)
+        {
+            if (GameObject.FindWithTag("take_PaperOutside").activeInHierarchy)
+            {
+               panel_importantItem.SetActive(true);
+               paperIsActive = false;
+            }
+        }
     }
 }

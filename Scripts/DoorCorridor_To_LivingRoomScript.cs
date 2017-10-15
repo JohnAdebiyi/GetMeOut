@@ -3,18 +3,17 @@ using UnityEngine.EventSystems;
 public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
 
     public Animator _animator;
-    public GameObject openPanel = null;
+    public GameObject openPanel;
     public Camera fpsCam;
     public ParticleSystem computerLocationEff;
-    public bool inTrigger;
 
     public string openText = "Left mouse to Open door";
     public string closeText = "";
 
-    private bool _isOpen = false;
 
+    public bool inTrigger;
     public static bool keyCardBedroom;
-
+    private bool _isOpen;
     private bool update = true;// for getting rid of errors -> NullReferenceException: Object reference not set to an instance of an object
 
     // Use this for initialization
@@ -23,14 +22,6 @@ public class DoorCorridor_To_LivingRoomScript : MonoBehaviour {
         _animator = GetComponent<Animator>();
     }
 
-    // for checking if the livingroom door panel is activ
-    private bool IsOpenPanelActive
-    {
-        get
-        {
-            return openPanel.activeInHierarchy;
-        }
-    }
 
     // for updating the livingroom door panel text 
     private void UpdatePanelText()
