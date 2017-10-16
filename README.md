@@ -3,7 +3,7 @@ A short video game with a mixture of escape the room and first person shooter el
 
 # Screenshots
 ![mainmenu](https://user-images.githubusercontent.com/31805013/31589920-46f22e8a-b209-11e7-83c0-0fa052756d85.jpg)
-![optionsettings](https://user-images.githubusercontent.com/31805013/31589930-6339ac26-b209-11e7-9b1d-4044e02efc6b.jpg)
+![optionsettings](https://user-images.githubusercontent.com/31805013/31627366-5f72dcee-b2ad-11e7-8448-197c5c033253.jpg)
 ![keyboardinstructions](https://user-images.githubusercontent.com/31805013/31589931-69c49a88-b209-11e7-966e-d40a4b69e70d.jpg)
 ![loadingscreen](https://user-images.githubusercontent.com/31805013/31589933-6e165aa4-b209-11e7-8e2b-f692f027180d.jpg)
 ![objectiv](https://user-images.githubusercontent.com/31805013/31589938-74ce6fee-b209-11e7-8028-79b419cba1f9.jpg)
